@@ -5,7 +5,7 @@ public class Dinosaure {
     private int age; // temps depuis lequel il est vivant ( en ms)
 
     public Dinosaure ( String type ){
-      age=0; // initialise l'age' à 0
+      age=0; // initialise l'age à 0
       this.type= type;
     }
 
@@ -37,7 +37,7 @@ public class Dinosaure {
       	* @param monde tableau du monde ( rempli de dinosaures)
       	* @param h indice du nombre de lignes du tableau
       	* @param l indice du nombre de colonnes du tableau
-      	* @return true si se situe au delà de l'extrémité 
+      	* @return true si se situe au delà de l'extrémité
       	*/
 
     public static boolean outOfBounds(Dinosaure [][]m, int h, int l){ // Fonction prenant en parametre le plateau de jeu et ses dimensions
