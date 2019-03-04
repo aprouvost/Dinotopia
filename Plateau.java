@@ -1,17 +1,19 @@
-import java util Scanner;
-import java Math;
 
 public class Plateau {
 
   // Besoin prendre en compte tous les éléments pour la mise en place du monde sur l'IHM ( tel que la température  etc là, ce dont on a parlé dans le cahier des charges)
     private int h ; // nombre de lignes du tableau ( hauteur)
     private int l; //nombre de colonnes du tableau ( largeur)
+    public double probaHerb;
+    public double prop;
+    private Dinosaure [][] mondeDino;
 
-    public Plateau ( int h, int l , double prop){
+    public Plateau ( int h, int l , double prop, double probaHerb){
       this.h=h;
       this.l=l;
       this.prop= prop;
-      Dinosaure[][]= genererMondeAleatoire(h,l, prop)  // Loic on prend prop avec l'utilisateur qui le rentre dans les para initiaux?
+      this.probaHerb= probaHerb;
+      mondeDino = genererMondeAleatoire(h,l, prop, probaHerb);
     }
 
 
@@ -22,35 +24,38 @@ public class Plateau {
     * @param p proportion vivants
     * @return monde nouvellement cree, tableau 2D de Dinosaures
     */
-    public static boolean [][] genererMondeAleatoire(int hauteur, int largeur, double p, double probaHerb){
-      boolean[][] monde= new boolean [hateur][largeur];
+    public static Dinosaure [][] genererMondeAleatoire(int h, int l, double prop, double probaHerb){
+      Dinosaure[][] monde= new Dinosaure[h][l];
       int variable=0;
       int vivants=0;
       int proba= 0;
-      int probaHerbCréés=0;
+      int probaHerbCrees=0;
       int herbi=0;
       int carni=0;
-      for (int i=0; i++; i< L){
-        for (int j=0; j++; j< H){
-          while ( proba<= p && probaHerbCréés< probaHerb){
-            variable= Math.random();
+      for (int i=0; i<l; i++){
+        for (int j=0; j<h; j++){
+          while ( proba<= prop && probaHerbCrees< probaHerb){
+            variable= (int)Math.random();
             if (variable< 0.5){
-              monde[i][j]=;  // ICI besoin créer un dinosaure herbivore derrière le =
+            //  monde[i][j]=;  // ICI besoin créer un dinosaure herbivore derrière le =
               vivants++;
               herbi++;
-              proba= vivants/(hauteur*largeur);
-              probaHerbCréés= herbi/vivants;
+              proba= vivants/(h*l);
+              probaHerbCrees= herbi/vivants;
             }else{
-              monde[i][j]= ;  // ICI besoin créer un dinosaure carnivore derrière le =
+            //  monde[i][j]= ;  // ICI besoin créer un dinosaure carnivore derrière le =
               vivants++;
               carni++;
-              proba= vivants/(hauteur*largeur);
+              proba= vivants/(h*l );
           }
         }
     }
   }
+  return monde;
 }
 
+
+// Permet effacer le terminal
   public static void effaceEcran() {
       String ESC = "\033[";
       System.out.print(ESC+"2J");
