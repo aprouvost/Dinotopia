@@ -1,9 +1,10 @@
 
 public class Dinosaure {
-    private String type ; // On indique si c'est un herbivore ou carnivore
-    private int age; // temps depuis lequel il est vivant ( en ms)
+    public String type ; // On indique si c'est un herbivore ou carnivore ( à définir dans les classes filles)
+    public int age; // temps depuis lequel il est vivant ( en ms)
+    public double pointsVie=100; // J'initialise à 100, à modifier plus tard
 
-    public Dinosaure ( String type ){
+    public Dinosaure (String type){
       age=0; // initialise l'age à 0
       this.type= type;
     }
