@@ -10,7 +10,14 @@ public class Event{ // Cette classe regroupe les différents Event que l'utilisa
     * @param i
     * @return i
     */
-  public void monteeDesEaux(){}
+  public void monteeDesEaux(){
+    /*for (int i=0; i<l; i++){
+      for (int j=0; j<h; j++){
+        if ( monde[i][j].type= "Herbivore"){
+          mode[i][j].retirerVieDinosaure(20);*/
+        }
+
+  }
 
     /** Simule une météorite tuant aléatoirement herbivores et carnivores
     * @param i

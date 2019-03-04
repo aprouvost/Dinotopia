@@ -40,13 +40,13 @@ public class Plateau {
           while ( proba<= prop && densiteHerbCrees< densiteHerb && densiteCarnCrees<densiteCarn){
             variable= (int)Math.random();
             if (variable< 0.5){
-              monde[i][j]=new Herbivore(0.2);  // ICI besoin que le 0.2 dépende de la densité végé init par l'utilisateur
+              monde[i][j]=new Herbivore(0.2);
               vivants++;
               herbi++;
               proba= vivants/(h*l);
               densiteHerbCrees= herbi/vivants;
             }else{
-              monde[i][j]= new Carnivore(0.3);  // ICI besoin créer un dinosaure carnivore avec propViande qui sera défini par la densité de population du monde
+              monde[i][j]= new Carnivore(0.3);
               vivants++;
               carni++;
               proba= vivants/(h*l );
@@ -67,8 +67,10 @@ public class Plateau {
       System.out.flush();
   }
 
+/*public void rendVivant(){
+  for (int i=0; i<l; i++){
+    for (int j=0; j<h; j++){
+      if (mondeDino[i][j].nombreVoisins()!=0){
 
-
-
-
+      }*/
 }

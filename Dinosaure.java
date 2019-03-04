@@ -1,5 +1,6 @@
 
 public class Dinosaure {
+
     public String type ; // On indique si c'est un herbivore ou carnivore ( à définir dans les classes filles)
     public int age; // temps depuis lequel il est vivant ( en ms)
     public double pointsVie=100; // J'initialise à 100, à modifier plus tard
@@ -96,7 +97,7 @@ public class Dinosaure {
       * @param pointsARetirer les points à enlever
       * @return rien ( modifie directement les attributs de la classe)
       */
-      public void retirerVieDinosaure( Dinosaure adv, double pointsARetirer){
+      public void retirerVieDinosaure(  double pointsARetirer){
            this.pointsVie= this.pointsVie- pointsARetirer;
        }
 
