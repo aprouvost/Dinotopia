@@ -4,16 +4,18 @@ public class Plateau {
   // Besoin prendre en compte tous les éléments pour la mise en place du monde sur l'IHM ( tel que la température  etc là, ce dont on a parlé dans le cahier des charges)
     private int h ; // nombre de lignes du tableau ( hauteur)
     private int l; //nombre de colonnes du tableau ( largeur)
-    public double probaHerb;
+    public double densiteHerb;
     public double prop;
+    public double densiteCarn;
     private Dinosaure [][] mondeDino;
 
-    public Plateau ( int h, int l , double prop, double probaHerb){
+    public Plateau ( int h, int l , double prop, double densiteHerb){
       this.h=h;
       this.l=l;
       this.prop= prop;
-      this.probaHerb= probaHerb;
-      mondeDino = genererMondeAleatoire(h,l, prop, probaHerb);
+      this.densiteHerb= densiteHerb;
+      this.densiteCarn=1- densiteHerb;
+      mondeDino = genererMondeAleatoire(h,l, prop, densiteHerb, densiteCarn);
     }
 
 
@@ -24,29 +26,31 @@ public class Plateau {
     * @param p proportion vivants
     * @return monde nouvellement cree, tableau 2D de Dinosaures
     */
-    public static Dinosaure [][] genererMondeAleatoire(int h, int l, double prop, double probaHerb){
+    public static Dinosaure [][] genererMondeAleatoire(int h, int l, double prop, double densiteHerb, double densiteCarn){
       Dinosaure[][] monde= new Dinosaure[h][l];
       int variable=0;
       int vivants=0;
-      int proba= 0;
-      int probaHerbCrees=0;
+      double proba= 0;
+      double densiteHerbCrees=0;
+      double densiteCarnCrees=0;
       int herbi=0;
       int carni=0;
       for (int i=0; i<l; i++){
         for (int j=0; j<h; j++){
-          while ( proba<= prop && probaHerbCrees< probaHerb){
+          while ( proba<= prop && densiteHerbCrees< densiteHerb && densiteCarnCrees<densiteCarn){
             variable= (int)Math.random();
             if (variable< 0.5){
-            //  monde[i][j]=;  // ICI besoin créer un dinosaure herbivore derrière le =
+              monde[i][j]=new Herbivore(0.2);  // ICI besoin que le 0.2 dépende de la densité végé init par l'utilisateur
               vivants++;
               herbi++;
               proba= vivants/(h*l);
-              probaHerbCrees= herbi/vivants;
+              densiteHerbCrees= herbi/vivants;
             }else{
-            //  monde[i][j]= ;  // ICI besoin créer un dinosaure carnivore derrière le =
+              monde[i][j]= new Carnivore(0.3);  // ICI besoin créer un dinosaure carnivore avec propViande qui sera défini par la densité de population du monde
               vivants++;
               carni++;
               proba= vivants/(h*l );
+              densiteCarnCrees= carni/vivants;
           }
         }
     }

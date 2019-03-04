@@ -17,6 +17,8 @@ public class Dinosaure {
       return " Dinosaure de type"+ type+ " vivant depuis"+age;
     }
 
+
+
     /** Calcule le nombre de voisins d’une cellule.
     * @param monde tableau du monde ( rempli de dinosaures )
     * @param l indice de la ligne de la cellule
@@ -37,6 +39,8 @@ public class Dinosaure {
           return ret; // retourne le nombre de voisins ( dans les cases voisines ) du dinosaure
         }
 
+
+
         /** Calcule à partir de la case indiquée si la case se situe sur le bord du plateau de jeu.
       	* @param monde tableau du monde ( rempli de dinosaures)
       	* @param h indice du nombre de lignes du tableau
@@ -56,6 +60,8 @@ public class Dinosaure {
               }
 
 
+
+
       /** Permet au dinosaure d'attaquer.
       * @param chanceCarni la probabilite qu'il gagne le combat contre un carnivore
       * @param chanceHerbi la probabilité qu'il gagne le combat contre un Herbivore
@@ -72,7 +78,9 @@ public class Dinosaure {
           return pointsVieRetire;
           }
 
-      /** Retire les points de vie à l'adversaire suite à l'attaque
+
+
+      /** Retire les points de vie à un adversaire
       * @param pointsARetirer les points à enlever à la vie de l'adversaire
       * @param adv l'adversaire à qui on retire la vie
       * @return la vie de l'adversaire après avoir subit l'attaque
@@ -81,7 +89,10 @@ public class Dinosaure {
         return adv.pointsVie- pointsARetirer;
       }
 
-      /** Retire les points de vie au dinosaure visé
+
+
+
+      /** Retire les points de vie au dinosaure
       * @param pointsARetirer les points à enlever
       * @return rien ( modifie directement les attributs de la classe)
       */
@@ -97,6 +108,7 @@ public class Dinosaure {
       public void ajouterVieDinosaure( double pointsAAjouter){
            this.pointsVie=this.pointsVie+ pointsAAjouter;
       }
+
 
 
 }
