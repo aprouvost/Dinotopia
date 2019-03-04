@@ -1,4 +1,3 @@
-import java util Scanner;
 
 public class Dinosaure {
     private String type ; // On indique si c'est un herbivore ou carnivore
@@ -25,7 +24,7 @@ public class Dinosaure {
         for(int i =h-1; i <= h+1; i++){
             for(int k = l-1; k<= l+1; k++){
                 if(outOfBounds(m,i,k) == false && (i == h && k == l) ==false){
-                    if(m[i][k] == true)
+                    if(m[i][k] != null)
                         ret ++;
                       }
                   }
@@ -50,3 +49,5 @@ public class Dinosaure {
                 }
                 return ret;
               }
+
+}
