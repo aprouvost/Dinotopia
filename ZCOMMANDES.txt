@@ -1,0 +1,12 @@
+git pull				POUR "TIRER" LES DOSSIERS
+
+-------
+
+git add .				POUR "POUSSER" LES DOSSIERS
+git commit -m "xxxxx"
+git push
+
+/!\ si message d'erreur, pas de push !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+PAS DE FORCE PUSH SINON JE CASSE TOUT.
