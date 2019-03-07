@@ -7,7 +7,7 @@ public class Plateau {
     public double densiteHerb;
     public double prop;
     public double densiteCarn;
-    private Dinosaure [][] mondeDino;
+    public Dinosaure [][] mondeDino;
 
     public Plateau ( int h, int l , double prop, double densiteHerb){
       this.h=h;
