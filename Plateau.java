@@ -39,7 +39,7 @@ public class Plateau {
         for (int j=0; j<h; j++){
           while ( proba<= prop && densiteHerbCrees< densiteHerb && densiteCarnCrees<densiteCarn){
             variable= (int)Math.random();
-            if (variable< 0.5){
+            if (variable< 0.9){
               monde[i][j]=new Herbivore(0.2);
               vivants++;
               herbi++;
