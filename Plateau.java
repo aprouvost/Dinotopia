@@ -1,5 +1,10 @@
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
-public class Plateau {
+public class Plateau extends JPanel {
 
   // Besoin prendre en compte tous les éléments pour la mise en place du monde sur l'IHM ( tel que la température  etc là, ce dont on a parlé dans le cahier des charges)
     private int h ; // nombre de lignes du tableau ( hauteur)
@@ -51,21 +56,42 @@ public class Plateau {
               carni++;
               proba= vivants/(h*l );
               densiteCarnCrees= carni/vivants;
+            }
           }
         }
+      }
+      return monde;
     }
-  }
-  return monde;
-}
 
+    // Permet de dessiner sur le plateau les dinos
+    public void paintComponent(Graphics g){
+      // Affiche une image (background) avec gestion exception
+      try {
+        Image img = ImageIO.read(new File("img/fond.jpg"));
+        g.drawImage(img, 0, 0,this.getWidth(),this.getHeight(), this);
+      }
+      catch (IOException e) {
+        e.printStackTrace();
+      }
+      g.setColor(Color.black);
+      int n = 40; //écart entre les lignes
+      for(int i=0; i<h; i++){
+          for(int j=0; j<l;j++){
+              if(mondeDino[i][j]!=null)
+                  g.drawString("O",(40+i*h),(40+j*l));
+              else
+                  g.drawString("T",(40+i*h),(40+j*l));
+          }
+      }
+    }
 
 // Permet effacer le terminal
-  public static void effaceEcran() {
-      String ESC = "\033[";
-      System.out.print(ESC+"2J");
-      System.out.print(ESC+"0;0H");
-      System.out.flush();
-  }
+    public static void effaceEcran() {
+        String ESC = "\033[";
+        System.out.print(ESC+"2J");
+        System.out.print(ESC+"0;0H");
+        System.out.flush();
+    }
 
 /*public void rendVivant(){
   for (int i=0; i<l; i++){

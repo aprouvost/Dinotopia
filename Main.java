@@ -3,13 +3,15 @@ import java.util.Scanner;
 public class Main{
 
     public static void main(String[] args){
-     int H = 10; // hauteur (en nombre de cellules)
-     int L = 20; // largeur
-   double P = 0.5; // probabilité de vie d'une cellule
-   double pp= 0.2;
-   double ppp= 1-pp;
+      int H = 20; // hauteur (en nombre de cellules)
+      int L = 20; // largeur
+      double P = 0.5; // probabilité de vie d'une cellule
+      double pp= 0.2;
+      double ppp= 1-pp;
       Plateau  vie= new Plateau ( H,L,P,pp);
+      new AffichagePlateau(vie);
       Dinosaure[][] monde=vie.mondeDino;
+
 
 
 // Affiche le tableau de dino sur la console pour voir son état en attendant l'interface graphique
