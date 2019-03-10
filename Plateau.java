@@ -42,7 +42,7 @@ public class Plateau extends JPanel {
       int carni=0;
       for (int i=0; i<l; i++){
         for (int j=0; j<h; j++){
-          while ( proba<= prop && densiteHerbCrees< densiteHerb && densiteCarnCrees<densiteCarn){
+          /*while ( proba<= prop && densiteHerbCrees< densiteHerb && densiteCarnCrees<densiteCarn){
             variable= (int)Math.random();
             if (variable< 0.9){
               monde[i][j]=new Herbivore(0.2);
@@ -50,16 +50,16 @@ public class Plateau extends JPanel {
               herbi++;
               proba= vivants/(h*l);
               densiteHerbCrees= herbi/vivants;
-            }else{
+            }else{*/
               monde[i][j]= new Carnivore(0.3);
-              vivants++;
+            /*  vivants++;
               carni++;
               proba= vivants/(h*l );
-              densiteCarnCrees= carni/vivants;
+              densiteCarnCrees= carni/vivants;*/
             }
-          }
+          }/*
         }
-      }
+      }*/
       return monde;
     }
 
