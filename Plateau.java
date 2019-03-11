@@ -62,6 +62,9 @@ public class Plateau extends JPanel {
       }*/
       return monde;
     }
+    
+
+
 
     // Permet de dessiner sur le plateau les dinos
     public void paintComponent(Graphics g){
@@ -117,25 +120,24 @@ public class Plateau extends JPanel {
     for(int i=0; i<h; i++){
         for(int j=0; j<l;j++){
           if(mondeDino[i][j].type== "Herbivore"){
-              if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>2){
-                mondeDino[i][j].pointsVie=0;
+              if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0){
+                mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
               }
-              if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>2  ){
+              if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>1 ){
                 int [] positionLibre=trouverCaseLibre(i,j);
                 if ( positionLibre[0]!=0 && positionLibre[0]!=0){
                   mondeDino[trouverCaseLibre(i,j)[0]][trouverCaseLibre(i,j)[1]]= new Herbivore (0.3);
                 }
                 }
               }
-
           if(mondeDino[i][j].type== "Carnivore "){
-              if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>2){
-                mondeDino[i][j].pointsVie=0;
+              if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0){
+                mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
             }
-              if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>2 && mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>2){
+              if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>2){
                 int [] positionLibre=trouverCaseLibre(i,j);
                 if ( positionLibre[0]!=0 && positionLibre[0]!=0){
-                  mondeDino[trouverCaseLibre(i,j)[0]][trouverCaseLibre(i,j)[1]]= new Herbivore (0.3);
+                  mondeDino[trouverCaseLibre(i,j)[0]][trouverCaseLibre(i,j)[1]]= new Carnivore (0.3);
                 }
           }
 

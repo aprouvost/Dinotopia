@@ -9,7 +9,11 @@ public class Main{
       double pp= 0.2;
       double ppp= 1-pp;
       Plateau  vie= new Plateau ( H,L,P,pp);
+
+      new AffichageFenetreDemarrage();
       new AffichagePlateau(vie);
+      new RegleDinotopia();
+
       Dinosaure[][] monde=vie.mondeDino;
 
 
