@@ -14,31 +14,45 @@ public class Dinosaure {
       this.chanceCarni= chanceCarni;
     }
 
+
     public String toString(){
       return " Dinosaure de type"+ type+ " vivant depuis"+age;
     }
 
 
 
-    /** Calcule le nombre de voisins d’une cellule.
+    /** Calcule le nombre de voisins Herbivores d’une cellule.
     * @param monde tableau du monde ( rempli de dinosaures )
     * @param l indice de la ligne de la cellule
     * @param c indice de la colonne de la cellule
     * @return Nombre de voisins
     */
 
-    public static int nbrVoisin(Dinosaure[][] m,int h, int l){
+    public static int nbrVoisinHerbi(Dinosaure[][] m,int h, int l){
         int ret = 0;
         for(int i =h-1; i <= h+1; i++){
             for(int k = l-1; k<= l+1; k++){
                 if(outOfBounds(m,i,k) == false && (i == h && k == l) ==false){
-                    if(m[i][k] != null)
+                    if(m[i][k] != null && m[i][k].type=="Herbivore")
                         ret ++;
                       }
                   }
                 }
-          return ret; // retourne le nombre de voisins ( dans les cases voisines ) du dinosaure
+          return ret; // retourne le nombre de voisins herbivores ( dans les cases voisines ) du dinosaure
         }
+
+        public static int nbrVoisinCarni(Dinosaure[][] m,int h, int l){
+            int ret = 0;
+            for(int i =h-1; i <= h+1; i++){
+                for(int k = l-1; k<= l+1; k++){
+                    if(outOfBounds(m,i,k) == false && (i == h && k == l) ==false){
+                        if(m[i][k] != null && m[i][k].type=="Carnivore")
+                            ret ++;
+                          }
+                      }
+                    }
+              return ret; // retourne le nombre de voisins carnivores ( dans les cases voisines ) du dinosaure
+            }
 
 
 

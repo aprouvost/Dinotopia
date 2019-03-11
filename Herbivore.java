@@ -8,5 +8,5 @@ public class Herbivore extends Dinosaure { // Herbivore est une classe fille. Di
       }
 
 
-    
+
     }

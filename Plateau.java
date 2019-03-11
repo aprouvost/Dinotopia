@@ -93,10 +93,55 @@ public class Plateau extends JPanel {
         System.out.flush();
     }
 
-/*public void rendVivant(){
-  for (int i=0; i<l; i++){
-    for (int j=0; j<h; j++){
-      if (mondeDino[i][j].nombreVoisins()!=0){
 
-      }*/
+    /** Permet de trouver la premiere case libre autour de lui
+    * @return tableau avec en première case la ligne, dans la deuxième la colonne
+    */
+ public int[] trouverCaseLibre(int h,int l){
+   int[] tab= new int[2];
+   for(int i =h-1; i <= h+1; i++){
+       for(int k = l-1; k<= l+1; k++){
+           if(mondeDino[i][k].outOfBounds(mondeDino,i,k) == false && (i == h && k == l) ==false){
+               if(mondeDino[i][k] == null )
+                    tab[0]=i;
+                    tab[1]=k;
+                 }
+             }
+           }
+     return tab;
+    }
+
+
+
+  public void  parcoursTab(){
+    for(int i=0; i<h; i++){
+        for(int j=0; j<l;j++){
+          if(mondeDino[i][j].type== "Herbivore"){
+              if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>2){
+                mondeDino[i][j].pointsVie=0;
+              }
+              if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>2  ){
+                int [] positionLibre=trouverCaseLibre(i,j);
+                if ( positionLibre[0]!=0 && positionLibre[0]!=0){
+                  mondeDino[trouverCaseLibre(i,j)[0]][trouverCaseLibre(i,j)[1]]= new Herbivore (0.3);
+                }
+                }
+              }
+
+          if(mondeDino[i][j].type== "Carnivore "){
+              if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>2){
+                mondeDino[i][j].pointsVie=0;
+            }
+              if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>2 && mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>2){
+                int [] positionLibre=trouverCaseLibre(i,j);
+                if ( positionLibre[0]!=0 && positionLibre[0]!=0){
+                  mondeDino[trouverCaseLibre(i,j)[0]][trouverCaseLibre(i,j)[1]]= new Herbivore (0.3);
+                }
+          }
+
+        }
+      }
+
+}
+}
 }
