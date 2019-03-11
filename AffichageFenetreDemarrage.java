@@ -15,12 +15,24 @@ import java.io.File;
 public class AffichageFenetreDemarrage extends JFrame implements ActionListener {
 
     private JButton boutonLancement;
+    private PanelB pan;
+    private Plateau vie;
 
-    public AffichageFenetreDemarrage(){
+    public AffichageFenetreDemarrage(Plateau vie){
+        Image icone = Toolkit.getDefaultToolkit().getImage("img/skull.jpg");
+        this.setIconImage(icone);
 
+        this.vie = vie;
+        try{
+          this.pan = new PanelB("img/Dinotopia.jpg");
+        }
+        catch(IOException e) {
+          e.printStackTrace();
+        }
+        this.add(pan);
         this.setTitle(" Bienvenue a DINOTOPIA !");
-        this.setSize(1000,700);
-    		this.setLocation(300,200);
+        this.setSize(760,350);
+    		this.setLocation(500,250);
     		this.setResizable(false);
     		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel conteneur = new JPanel();
@@ -37,21 +49,13 @@ public class AffichageFenetreDemarrage extends JFrame implements ActionListener 
         this.add(conteneur);
   }
 
-  public void paintComponent(Graphics g){
-    // Affiche la fenetre de demarrage du jeu
-    try {
-      Image img = ImageIO.read(new File("img/Dinotopia.jpg"));
-      g.drawImage(img, 0, 0,this.getWidth(),this.getHeight(), this);
-    }
-    catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
 
 
   public void actionPerformed (ActionEvent e){
     if (e.getSource() == boutonLancement){
-      System.out.println ( "Clic lancement d'une partie.");
+      AffichagePlateau p = new AffichagePlateau(vie);
+      new RegleDinotopia(p);
+      this.setVisible(false);
   }
 }
 }

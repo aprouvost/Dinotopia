@@ -10,16 +10,10 @@ public class Main{
       double ppp= 1-pp;
       Plateau  vie= new Plateau ( H,L,P,pp);
 
-      new AffichageFenetreDemarrage();
-      new AffichagePlateau(vie);
-      new RegleDinotopia();
-
+      new AffichageFenetreDemarrage(vie);
       Dinosaure[][] monde=vie.mondeDino;
 
-
-
 // Affiche le tableau de dino sur la console pour voir son état en attendant l'interface graphique
-
 
           System.out.print("+");
           for(int j=0; j<L;j++)
@@ -34,7 +28,6 @@ public class Main{
                       System.out.print("X");
                   else
                       System.out.print(".");
-
             }
             System.out.println("|");
           }

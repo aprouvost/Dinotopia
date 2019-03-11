@@ -13,6 +13,8 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 	Plateau monde;
 
 	public AffichagePlateau(Plateau vie){
+		Image icone = Toolkit.getDefaultToolkit().getImage("img/skull.jpg");
+		this.setIconImage(icone);
 		this.monde = vie;
 		this.setTitle("Dinotopia");
 		this.setSize(800,500);
@@ -25,9 +27,12 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		 */
 
 		this.add(monde);
-		this.setVisible(true);		// Pour rendre la fenêtre visible
+		this.setVisible(false);		// Pour rendre la fenêtre visible
 	}
 
+	public void AffichePlateau(){
+		this.setVisible(true);
+	}
 
 
 	/**

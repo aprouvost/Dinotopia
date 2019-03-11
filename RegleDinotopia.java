@@ -15,11 +15,23 @@ import java.io.File;
 public class RegleDinotopia extends JFrame implements ActionListener {
 
     private JButton boutonLancement;
+    private PanelB pan;
+    private AffichagePlateau p;
 
-    public RegleDinotopia(){
+    public RegleDinotopia(AffichagePlateau p){
+        Image icone = Toolkit.getDefaultToolkit().getImage("img/skull.jpg");
+        this.setIconImage(icone);
 
+        this.p = p;
+        try{
+          this.pan = new PanelB("img/Regles.jpg");
+        }
+        catch(IOException e) {
+          e.printStackTrace();
+        }
+        this.add(pan);
         this.setTitle(" Regles de Dinotopia");
-        this.setSize(1000,700);
+        this.setSize(1500,640);
     		this.setLocation(300,200);
     		this.setResizable(false);
     		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,19 +57,11 @@ public class RegleDinotopia extends JFrame implements ActionListener {
         this.add(conteneur);
 
   }
-      public void paintComponent(Graphics g){
-        // Affiche la fenetre de demarrage du jeu
-        try {
-          Image img = ImageIO.read(new File("img/Regles.jpg"));
-          g.drawImage(img, 0, 0,this.getWidth(),this.getHeight(), this);
-        }
-        catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
+
       public void actionPerformed (ActionEvent e){
         if (e.getSource() == boutonLancement){
-          System.out.println ( "Clic regles comprises.");
+          p.AffichePlateau();
+          this.setVisible(false);
       }
     }
 }
