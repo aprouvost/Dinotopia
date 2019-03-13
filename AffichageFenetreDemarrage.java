@@ -25,10 +25,12 @@ public class AffichageFenetreDemarrage extends JFrame implements ActionListener 
         this.vie = vie;
         try{
           this.pan = new PanelB("img/Dinotopia.jpg");
+          System.out.print("hello");
         }
         catch(IOException e) {
           e.printStackTrace();
         }
+        pan.setLayout(null);
         this.add(pan);
         this.setTitle(" Bienvenue a DINOTOPIA !");
         this.setSize(760,350);

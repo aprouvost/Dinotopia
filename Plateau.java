@@ -62,7 +62,7 @@ public class Plateau extends JPanel {
       }*/
       return monde;
     }
-    
+
 
 
 
@@ -70,21 +70,20 @@ public class Plateau extends JPanel {
     public void paintComponent(Graphics g){
       // Affiche une image (background) avec gestion exception
       try {
-        Image img = ImageIO.read(new File("img/fond.jpg"));
-        g.drawImage(img, 0, 0,this.getWidth(),this.getHeight(), this);
+        g.setColor(Color.black);
+        int n = 40; //écart entre les lignes
+        for(int i=0; i<h; i++){
+            for(int j=0; j<l;j++){
+                if(mondeDino[i][j]!=null){
+                    g.drawImage(ImageIO.read(new File("img/herbe3.jpg")),(40+i*h),(40+j*l),this);
+                }
+                else
+                    g.drawString("T",(40+i*h),(40+j*l));
+            }
+        }
       }
       catch (IOException e) {
         e.printStackTrace();
-      }
-      g.setColor(Color.black);
-      int n = 40; //écart entre les lignes
-      for(int i=0; i<h; i++){
-          for(int j=0; j<l;j++){
-              if(mondeDino[i][j]!=null)
-                  g.drawString("O",(40+i*h),(40+j*l));
-              else
-                  g.drawString("T",(40+i*h),(40+j*l));
-          }
       }
     }
 
