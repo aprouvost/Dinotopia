@@ -20,7 +20,7 @@ public class Plateau extends JPanel {
       this.prop= prop;
       this.densiteHerb= densiteHerb;
       this.densiteCarn=1- densiteHerb;
-      mondeDino = genererMondeAleatoire(h,l, prop, densiteHerb, densiteCarn);
+      mondeDino= genererMondeAleatoire(h,l, prop, densiteHerb);
     }
 
 
@@ -31,37 +31,51 @@ public class Plateau extends JPanel {
     * @param p proportion vivants
     * @return monde nouvellement cree, tableau 2D de Dinosaures
     */
-    public static Dinosaure [][] genererMondeAleatoire(int h, int l, double prop, double densiteHerb, double densiteCarn){
-      Dinosaure[][] monde= new Dinosaure[h][l];
-      int variable=0;
-      int vivants=0;
-      double proba= 0;
-      double densiteHerbCrees=0;
-      double densiteCarnCrees=0;
-      int herbi=0;
-      int carni=0;
-      for (int i=0; i<l; i++){
-        for (int j=0; j<h; j++){
-          /*while ( proba<= prop && densiteHerbCrees< densiteHerb && densiteCarnCrees<densiteCarn){
-            variable= (int)Math.random();
-            if (variable< 0.9){
-              monde[i][j]=new Herbivore(0.2);
-              vivants++;
-              herbi++;
-              proba= vivants/(h*l);
-              densiteHerbCrees= herbi/vivants;
-            }else{*/
-              monde[i][j]= new Carnivore(0.3);
-            /*  vivants++;
-              carni++;
-              proba= vivants/(h*l );
-              densiteCarnCrees= carni/vivants;*/
-            }
-          }/*
-        }
-      }*/
-      return monde;
+
+    public static Dinosaure [][] genererMondeAleatoire(int h, int l, double prop, double densiteHerb){
+    	Dinosaure[][] monde= new Dinosaure[h][l];
+
+    	int vivants = (int)prop*(h*l); //calcul de la proportion de vivants � mettre sur le plateau
+    	int herbi = (int)densiteHerb*vivants; //calcul du nombre d'herbis � placer
+    	int carni = (int)(1-densiteHerb)*vivants; //calcul du nombre de carnis � placer
+
+    	int herbicree = 0;
+    	int carnicree = 0;
+
+    	//on commence par les herbivores
+    	for (int i=0; i<l; i++){
+    		for (int j=0; j<h; j++){
+    			while(herbicree<=herbi) {
+
+    				int x = (int) (l*Math.random());
+    				int y = (int) (h*Math.random());
+
+    				if(monde[x][y]== null)
+    					monde[x][y] = new Herbivore(0.2);
+
+    				herbicree++;
+    			}
+    		}
+    	}
+
+    	//on fait les carnivores
+    	for(int i=0; i<l; i++) {
+    		for(int j=0; j<h; j++) {
+    			while(carnicree<=carni) {
+
+    				int a = (int) (l*Math.random());
+    				int b = (int) (h*Math.random());
+
+    				if(monde[a][b]== null)
+    					monde[a][b] = new Carnivore(0.7);
+
+    				carnicree++;
+    			}
+    		}
+    	}
+    	return monde;
     }
+
 
 
 
@@ -99,23 +113,25 @@ public class Plateau extends JPanel {
     /** Permet de trouver la premiere case libre autour de lui
     * @return tableau avec en première case la ligne, dans la deuxième la colonne
     */
- public int[] trouverCaseLibre(int h,int l){
-   int[] tab= new int[2];
-   for(int i =h-1; i <= h+1; i++){
-       for(int k = l-1; k<= l+1; k++){
-           if(mondeDino[i][k].outOfBounds(mondeDino,i,k) == false && (i == h && k == l) ==false){
-               if(mondeDino[i][k] == null )
-                    tab[0]=i;
-                    tab[1]=k;
-                 }
-             }
-           }
-     return tab;
-    }
-
+    public int[][] trouverCaseLibre(int h,int l){
+      int[][] tab= new int[8][2]; // 8 cases libres au maximum autour de lui
+      int nombre=0; // nombre de cases libres trouvées
+      for(int i =h-1; i <= h+1; i++){
+          for(int k = l-1; k<= l+1; k++){
+              if(mondeDino[i][k].outOfBounds(mondeDino,i,k) == false && (i == h && k == l) ==false){
+                  if(mondeDino[i][k] == null )
+                       tab[nombre][0]=i;
+                       tab[nombre][1]=k;
+                       nombre++;
+                    }
+                }
+              }
+        return tab;
+       }
 
 
   public void  parcoursTab(){
+
     for(int i=0; i<h; i++){
         for(int j=0; j<l;j++){
           if(mondeDino[i][j].type== "Herbivore"){
@@ -123,9 +139,11 @@ public class Plateau extends JPanel {
                 mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
               }
               if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>1 ){
-                int [] positionLibre=trouverCaseLibre(i,j);
-                if ( positionLibre[0]!=0 && positionLibre[0]!=0){
-                  mondeDino[trouverCaseLibre(i,j)[0]][trouverCaseLibre(i,j)[1]]= new Herbivore (0.3);
+                int [][] positionLibre=trouverCaseLibre(i,j);
+                if ( positionLibre[0][0]!=0 && positionLibre[0][1]!=0){
+                  int parcours= (int)(8*Math.random());
+                  mondeDino[positionLibre[parcours][0]][positionLibre[parcours][1]]= new Herbivore (0.3);
+
                 }
                 }
               }
@@ -134,15 +152,16 @@ public class Plateau extends JPanel {
                 mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
             }
               if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>2){
-                int [] positionLibre=trouverCaseLibre(i,j);
-                if ( positionLibre[0]!=0 && positionLibre[0]!=0){
-                  mondeDino[trouverCaseLibre(i,j)[0]][trouverCaseLibre(i,j)[1]]= new Carnivore (0.3);
+                int [][] positionLibreBis=trouverCaseLibre(i,j);
+
+              if ( positionLibreBis[0][0]!=0 && positionLibreBis[0][1]!=0){
+                int parcours= (int)(8*Math.random());
+                mondeDino[positionLibreBis[parcours][0]][positionLibreBis[parcours][1]]= new Carnivore (0.3);
                 }
           }
 
         }
       }
-
 }
 }
 }
