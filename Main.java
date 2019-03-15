@@ -37,6 +37,5 @@ public class Main{
               System.out.print("-");
           System.out.println("+");
 
-          System.out.println(monde[0][0].type);
         }
     }

@@ -88,12 +88,18 @@ public class Plateau extends JPanel {
         int n = 40; //écart entre les lignes
         for(int i=0; i<h; i++){
             for(int j=0; j<l;j++){
-                if(mondeDino[i][j]!=null){
-                    g.drawImage(ImageIO.read(new File("img/herbe3.jpg")),(40+i*h),(40+j*l),this);
+              if (mondeDino[i][j]!=null){
+                if (mondeDino[i][j].type=="Herbivore"){
+                  g.drawImage(ImageIO.read(new File("img/dino1.png")),(40+i*(h-2)),(40+j*(l-2)),this);
                 }
-                else
-                    g.drawString("T",(40+i*h),(40+j*l));
-            }
+                else{
+                  g.drawImage(ImageIO.read(new File("img/dino1.png")),(40+i*(h-2)),(40+j*(l-2)),this);
+                }
+              }
+              else{
+                g.drawImage(ImageIO.read(new File("img/herbe3.jpg")),(40+i*(h-2)),(40+j*(l-2)),this);
+              }
+          }
         }
       }
       catch (IOException e) {

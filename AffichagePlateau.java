@@ -8,11 +8,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.LinkedList;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class AffichagePlateau extends JFrame implements ActionListener {
 	Plateau monde;
+	private PanelB pan;
 
 	public AffichagePlateau(Plateau vie){
+		try{
+		 this.pan = new PanelB("img/fond.jpg");
+		}
+		catch(IOException e) {
+		 e.printStackTrace();
+		}
+
 		Image icone = Toolkit.getDefaultToolkit().getImage("img/skull.jpg");
 		this.setIconImage(icone);
 		this.monde = vie;
@@ -25,9 +35,11 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		/**
 		 * Mon panneau Global
 		 */
-
-		this.add(monde);
 		this.setVisible(false);		// Pour rendre la fenêtre visible
+		pan.setLayout(null); /////
+		pan.add(monde);
+		this.add(pan);
+
 	}
 
 	public void AffichePlateau(){

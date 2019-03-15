@@ -22,14 +22,6 @@ public class RegleDinotopia extends JFrame implements ActionListener {
         Image icone = Toolkit.getDefaultToolkit().getImage("img/skull.jpg");
         this.setIconImage(icone);
         this.p = p;
-        try{
-          this.pan = new PanelB("img/Regles.jpg");
-        }
-        catch(IOException e) {
-          e.printStackTrace();
-        }
-        pan.setResizable(true);
-        this.add(pan);
         this.setTitle(" Regles de Dinotopia");
         this.setSize(1500,640);
     		this.setLocation(300,200);
@@ -51,10 +43,20 @@ public class RegleDinotopia extends JFrame implements ActionListener {
         texteRegles.setSize(1000,250);
         texteRegles.setLocation(25,25);
 
+        try{
+          this.pan = new PanelB("img/Regles.jpg");
+        }
+        catch(IOException e) {
+          e.printStackTrace();
+        }
+        this.add(pan);
+
         conteneur.add(boutonLancement);
         conteneur.add(texteRegles);
         this.setVisible(true);
         this.add(conteneur);
+
+
 
   }
 
