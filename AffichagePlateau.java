@@ -43,7 +43,7 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		/**
 		 * Panneau statistiques
 		 */
-		new PanStats();
+		//new PanStats();
 
 	}
 

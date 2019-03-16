@@ -34,7 +34,7 @@ public class AffichageFenetreDemarrage extends JFrame implements ActionListener 
         this.add(pan);
         this.setTitle(" Bienvenue a DINOTOPIA !");
         this.setSize(760,350);
-    		this.setLocation(500,250);
+    		this.setLocation(0,0);
     		this.setResizable(false);
     		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel conteneur = new JPanel();

@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 
 public class Plateau extends JPanel {
 
-  // Besoin prendre en compte tous les éléments pour la mise en place du monde sur l'IHM ( tel que la température  etc là, ce dont on a parlé dans le cahier des charges)
+  // Besoin prendre en compte tous les éléments pour la mise en place du monde sur l'IHM ( tel que la température  etc, ce dont on a parlé dans le cahier des charges)
     private int h ; // nombre de lignes du tableau ( hauteur)
     private int l; //nombre de colonnes du tableau ( largeur)
     public double densiteHerb;
@@ -57,55 +57,6 @@ public class Plateau extends JPanel {
           return monde;
         }
 
-
-/*  public static Dinosaure [][] genererMondeAleatoire(int h, int l, double prop, double densiteHerb){
-    	Dinosaure[][] monde= new Dinosaure[h][l];
-
-    	int vivants = (int)prop*(h*l); //calcul de la proportion de vivants � mettre sur le plateau
-    	int herbi = (int)densiteHerb*vivants; //calcul du nombre d'herbis � placer
-    	int carni = (int)(1-densiteHerb)*vivants; //calcul du nombre de carnis � placer
-
-    	int herbicree = 0;
-    	int carnicree = 0;
-
-    	//on commence par les herbivores
-    	for (int i=0; i<l; i++){
-    		for (int j=0; j<h; j++){
-    			while(herbicree<=herbi) {
-
-    				int x = (int) (l*Math.random());
-    				int y = (int) (h*Math.random());
-
-    				if(monde[x][y]== null)
-    					monde[x][y] = new Herbivore(0.2);
-
-    				herbicree++;
-    			}
-    		}
-    	}
-
-    	//on fait les carnivores
-    	for(int i=0; i<l; i++) {
-    		for(int j=0; j<h; j++) {
-    			while(carnicree<=carni) {
-
-    				int a = (int) (l*Math.random());
-    				int b = (int) (h*Math.random());
-
-    				if(monde[a][b]== null)
-    					monde[a][b] = new Carnivore(0.7);
-
-    				carnicree++;
-    			}
-    		}
-    	}
-    	return monde;
-    }
-
-*/
-
-
-
     // Permet de dessiner sur le plateau les dinos
     public void paintComponent(Graphics g){
       // Affiche une image (background) avec gestion exception
@@ -141,6 +92,18 @@ public class Plateau extends JPanel {
         System.out.flush();
     }
 
+    public boolean mondeVivant(){
+      boolean estVivant= false;
+      for (int i=0; i<l; i++){
+        for (int j=0; j<h; j++){
+          if (mondeDino[i][j] != null){
+              estVivant = true;
+          }
+        }
+      }
+      return estVivant;
+    }
+
 
     /** Permet de trouver la premiere case libre autour de lui
     * @return tableau avec en première case la ligne, dans la deuxième la colonne
@@ -150,12 +113,12 @@ public class Plateau extends JPanel {
       int nombre=0; // nombre de cases libres trouvées
       for(int i =x-1; i <= x+1; i++){
           for(int k = y-1; k<= y+1; k++){
-              if(i>0 && k>0 && mondeDino[i][k].outOfBounds(mondeDino,i,k) == false && (i == x) ==false &&( k == y)== false){
+              if(i>0 && k>0 && i<20 && k<20 && mondeDino[i][k].outOfBounds(mondeDino,i,k) == false && (i == x) ==false &&( k == y)== false){
                   if(mondeDino[i][k] == null )
                        tab[nombre][0]=i;
                        tab[nombre][1]=k;
                        nombre++;
-                    }
+                  }
                 }
               }
         return tab;
@@ -163,16 +126,19 @@ public class Plateau extends JPanel {
 
        public static boolean outOfBounds(Dinosaure [][]m, int h, int l){ // Fonction prenant en parametre le plateau de jeu et ses dimensions
                boolean ret = false;
-               if(h >= m.length || h <= 0){
+               if(h > m.length || h <= 0){
                    ret = true;
-                   }
-                   else if(l >= m[h].length || l <= 0){
+                }
+              else if(l > m[h].length || l <= 0){
                    ret = true;
-                   }
-                   return ret;
-                 }
+               }
+           return ret;
+        }
 
-
+        /** Parcours du tableau et intéraction entre les différents dinosaures
+        * @param
+        * @return rien, modifie directement le tableau
+        */
   public void  parcoursTab(){
 
     for(int i=0; i<h; i++){
@@ -190,21 +156,20 @@ public class Plateau extends JPanel {
                 }
                 }
               }
-          if(mondeDino[i][j].type== "Carnivore "){
+          if(mondeDino[i][j]!= null && mondeDino[i][j].type== "Carnivore "){
               if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0){
                 mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
-            }
+             }
               if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>2){
                 int [][] positionLibreBis=trouverCaseLibre(i,j);
 
               if ( positionLibreBis[0][0]!=0 && positionLibreBis[0][1]!=0){
                 int parcours= (int)(8*Math.random());
                 mondeDino[positionLibreBis[parcours][0]][positionLibreBis[parcours][1]]= new Carnivore (0.3);
-                }
+            }
           }
-
         }
       }
-}
-}
+    }
+  }
 }
