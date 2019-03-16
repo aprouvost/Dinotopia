@@ -29,7 +29,7 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		this.setTitle("Dinotopia");
 		this.setSize(800,500);
 		this.setLocation(300,200);		//Pour placer la fenêtre au centre de l'écran
-		this.setResizable(false); 		//Pour empêcher le redimensionnement de la fenêtre
+		this.setResizable(false); 		//Pour empêcher le redimensionnement de la fenêtre  /!\ � changer
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		/**
@@ -39,6 +39,11 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		pan.setLayout(null); /////
 		pan.add(monde);
 		this.add(pan);
+		
+		/**
+		 * Panneau statistiques
+		 */
+		panStats stats = new panStats();
 
 	}
 
