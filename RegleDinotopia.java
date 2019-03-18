@@ -10,7 +10,7 @@ import java.awt.event.*;
 import java.util.LinkedList;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import java.io.File;
+import java.io.*;
 
 public class RegleDinotopia extends JFrame implements ActionListener {
 
@@ -28,36 +28,52 @@ public class RegleDinotopia extends JFrame implements ActionListener {
     		this.setResizable(false);
     		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
         JPanel conteneur = new JPanel();
         conteneur.setLayout(null);
-        conteneur.setSize(600,600);
+        conteneur.setSize(1500,640);
         conteneur.setLocation(60,60);
 
         boutonLancement = new JButton ("J'ai compris les regles, je souhaite lancer ma partie");
         boutonLancement.setSize(500,70);
-        boutonLancement.setLocation(300,200);
+        boutonLancement.setLocation(500,400);
         boutonLancement.setBackground(Color.white);
         boutonLancement.addActionListener(this);
 
-        JLabel texteRegles = new JLabel ("BIENVENUE A DINOTOPIA \nDinotopia est un jeu de dynamique de populations. Votre but est de maintenant de configurer votre monde et de le maintenir en vie le plus longtemps possible");
-        texteRegles.setSize(1000,250);
-        texteRegles.setLocation(25,25);
+
+
+        JLabel texteRegles = new JLabel("");
+        String ligne ="Common";
+        setFont(new Font("TimesRoman",Font.BOLD+Font.ITALIC,20));
+        setForeground(Color.white);/*
+        try{
+          InputStream flux = new FileInputStream("regles.txt");
+          InputStreamReader lecture = new InputStreamReader(flux);
+          BufferedReader buff=new BufferedReader(lecture);
+          while ((ligne=buff.readLine())!=null){
+          	ligne += ligne;
+          }
+          buff.close();
+        }
+        catch (Exception e){
+          System.out.println(e.toString());
+        }*/
+        texteRegles.setText(ligne);
+        texteRegles.setSize(100,100);
+        texteRegles.setLocation(10,10);
+
+        conteneur.add(boutonLancement);
+        conteneur.add(texteRegles);
 
         try{
-          this.pan = new PanelB("img/Regles.jpg");
+          this.pan = new PanelB("img/fond.jpg");
         }
         catch(IOException e) {
           e.printStackTrace();
         }
-        this.add(pan);
-
-        conteneur.add(boutonLancement);
-        conteneur.add(texteRegles);
-        this.setVisible(true);
         this.add(conteneur);
-
-
-
+        this.add(pan);
+        this.setVisible(true);
   }
 
       public void actionPerformed (ActionEvent e){
