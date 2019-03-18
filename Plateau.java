@@ -145,31 +145,38 @@ public class Plateau extends JPanel {
         for(int j=0; j<l;j++){
           if(mondeDino[i][j]!= null && mondeDino[i][j].type== "Herbivore"){
               if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0){
-                mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
+                mondeDino[i][j].retirerVieDinosaure(  (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
+                //mondeDino[i][j].pointsVie=0;
+                if (mondeDino[i][j].dinoIsDead()==true){
+                  mondeDino[i][j]=null;
+                }
               }
-              if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>1 ){
+             if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>0 ){
                 int [][] positionLibre=trouverCaseLibre(i,j);
                 if ( positionLibre[0][0]!=0 && positionLibre[0][1]!=0){
                   int parcours= (int)(8*Math.random());
                   mondeDino[positionLibre[parcours][0]][positionLibre[parcours][1]]= new Herbivore (0.3);
-
-                }
                 }
               }
-          if(mondeDino[i][j]!= null && mondeDino[i][j].type== "Carnivore "){
-              if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0){
-                mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
-             }
-              if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>2){
-                int [][] positionLibreBis=trouverCaseLibre(i,j);
+            }
 
+          if(mondeDino[i][j]!= null && mondeDino[i][j].type== "Carnivore"){
+             if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>0){
+                mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
+                //mondeDino[i][j].pointsVie=0;
+                if (mondeDino[i][j].dinoIsDead()==true){
+                mondeDino[i][j]=null;
+                }
+              }
+              if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0 ){
+                int [][] positionLibreBis=trouverCaseLibre(i,j);
               if ( positionLibreBis[0][0]!=0 && positionLibreBis[0][1]!=0){
                 int parcours= (int)(8*Math.random());
                 mondeDino[positionLibreBis[parcours][0]][positionLibreBis[parcours][1]]= new Carnivore (0.3);
             }
           }
         }
+        }
       }
     }
   }
-}

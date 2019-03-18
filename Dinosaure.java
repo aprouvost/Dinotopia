@@ -41,6 +41,15 @@ public class Dinosaure {
           return ret; // retourne le nombre de voisins herbivores ( dans les cases voisines ) du dinosaure
         }
 
+        public boolean dinoIsDead(){
+          boolean isDead=false;
+          if ( pointsVie==0){
+            return true;
+          }else{
+            return false;
+          }
+        }
+
         public static int nbrVoisinCarni(Dinosaure[][] m,int h, int l){
             int ret = 0;
             for(int i =h-1; i <= h+1; i++){
