@@ -1,0 +1,3 @@
+BIENVENUE A DINOTOPIA
+Dinotopia est un jeu de dynamique de populations.
+Votre but est de maintenant de configurer votre monde et de le maintenir en vie le plus longtemps possible

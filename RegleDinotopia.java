@@ -24,15 +24,16 @@ public class RegleDinotopia extends JFrame implements ActionListener {
         this.p = p;
         this.setTitle(" Regles de Dinotopia");
         this.setSize(1500,640);
-    		this.setLocation(300,200);
+    		this.setLocation(100,50);
     		this.setResizable(false);
     		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
         JPanel conteneur = new JPanel();
         conteneur.setLayout(null);
-        conteneur.setSize(1500,640);
-        conteneur.setLocation(60,60);
+        conteneur.setSize(1500,750);
+        conteneur.setLocation(10,10);
+        conteneur.setBackground(new Color(0,0,0,0));
 
         boutonLancement = new JButton ("J'ai compris les regles, je souhaite lancer ma partie");
         boutonLancement.setSize(500,70);
@@ -43,30 +44,35 @@ public class RegleDinotopia extends JFrame implements ActionListener {
 
 
         JLabel texteRegles = new JLabel("");
-        String ligne ="Common";
-        setFont(new Font("TimesRoman",Font.BOLD+Font.ITALIC,20));
-        setForeground(Color.white);/*
+        String ligne ="";
+        String msg ="<html> ";
         try{
-          InputStream flux = new FileInputStream("regles.txt");
-          InputStreamReader lecture = new InputStreamReader(flux);
-          BufferedReader buff=new BufferedReader(lecture);
-          while ((ligne=buff.readLine())!=null){
-          	ligne += ligne;
+          BufferedReader lecteurAvecBuffer = null;
+          try{
+      	     lecteurAvecBuffer = new BufferedReader(new FileReader(new File("regles.txt")));
           }
-          buff.close();
+          catch(FileNotFoundException exc)
+            {
+      	       System.out.println("Erreur d'ouverture");
+            }
+          while ((ligne = lecteurAvecBuffer.readLine()) != null)
+            msg += ligne + "</br>";
+          lecteurAvecBuffer.close();
         }
         catch (Exception e){
           System.out.println(e.toString());
-        }*/
-        texteRegles.setText(ligne);
-        texteRegles.setSize(100,100);
-        texteRegles.setLocation(10,10);
+        }
+        texteRegles.setFont(new Font("TimesRoman",Font.BOLD+Font.ITALIC,10));
+        texteRegles.setForeground(Color.white);
+        texteRegles.setText(msg + "</html>");
+        texteRegles.setSize(1000,200);
+        texteRegles.setLocation(0,0);
 
         conteneur.add(boutonLancement);
         conteneur.add(texteRegles);
 
         try{
-          this.pan = new PanelB("img/fond.jpg");
+          this.pan = new PanelB("img/Regles.jpg");
         }
         catch(IOException e) {
           e.printStackTrace();
