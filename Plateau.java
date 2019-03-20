@@ -61,6 +61,7 @@ public class Plateau extends JPanel {
     public void paintComponent(Graphics g){
       // Affiche une image (background) avec gestion exception
       try {
+        g.drawImage(ImageIO.read(new File("img/fond.jpg")),0,0,1366,768,this);
         g.setColor(Color.black);
         int n = 40; //écart entre les lignes
         for(int i=0; i<h; i++){
@@ -176,7 +177,7 @@ public class Plateau extends JPanel {
                System.out.print( "bebe Herb en "+positionLibre[parcours][0]+"," );
                System.out.println(positionLibre[parcours][1]);
                System.out.println();*/
-             
+
            }
         }
 
@@ -220,7 +221,7 @@ public class Plateau extends JPanel {
             System.out.println(positionLibreBis[parcours][1]);
             System.out.println();*/
 
-            
+
           }
         }
 
