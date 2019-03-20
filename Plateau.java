@@ -39,7 +39,7 @@ public class Plateau extends JPanel {
           for (int i=0; i<l; i++){
         		for (int j=0; j<h; j++){
               double variableUn= Math.random();
-              if ( variableUn> prop){
+              if ( variableUn< prop){
                 double variableDeux= Math.random();
                 if ( variableDeux< densiteHerb){
                   monde[i][j]= new Herbivore(0.2);
@@ -61,21 +61,20 @@ public class Plateau extends JPanel {
     public void paintComponent(Graphics g){
       // Affiche une image (background) avec gestion exception
       try {
-        g.drawImage(ImageIO.read(new File("img/fond.jpg")),0,0,this);
         g.setColor(Color.black);
         int n = 40; //écart entre les lignes
         for(int i=0; i<h; i++){
             for(int j=0; j<l;j++){
               if (mondeDino[i][j]!=null){
                 if (mondeDino[i][j].type=="Herbivore"){
-                  g.drawImage(ImageIO.read(new File("img/dino2.png")),(40+i*(20-2)),(40+j*(20-2)),this);
+                  g.drawImage(ImageIO.read(new File("img/dino1.png")),(40+i*(h-2)),(40+j*(l-2)),this);
                 }
                 else{
-                  g.drawImage(ImageIO.read(new File("img/dino1.png")),(40+i*(20-2)),(40+j*(20-2)),this);
+                  g.drawImage(ImageIO.read(new File("img/dino1.png")),(40+i*(h-2)),(40+j*(l-2)),this);
                 }
               }
               else{
-                g.drawImage(ImageIO.read(new File("img/herbe3.jpg")),(40+i*(20-2)),(40+j*(20-2)),this);
+                g.drawImage(ImageIO.read(new File("img/herbe3.jpg")),(40+i*(h-2)),(40+j*(l-2)),this);
               }
           }
         }
@@ -147,15 +146,17 @@ public class Plateau extends JPanel {
           if(mondeDino[i][j]!= null && mondeDino[i][j].type== "Herbivore"){
               if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0){
                 mondeDino[i][j].retirerVieDinosaure(  (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
-                //mondeDino[i][j].pointsVie=0;
                 if (mondeDino[i][j].dinoIsDead()==true){
                   mondeDino[i][j]=null;
                 }
               }
-             if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>0 ){
+              int voisins=mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)+mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j);
+             int voiHerb=mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j);
+             if(voiHerb>0 ){
                 int [][] positionLibre=trouverCaseLibre(i,j);
                 if ( positionLibre[0][0]!=0 && positionLibre[0][1]!=0){
-                  int parcours= (int)(8*Math.random());
+
+                  int parcours= (int)((8-voisins)*Math.random());
                   mondeDino[positionLibre[parcours][0]][positionLibre[parcours][1]]= new Herbivore (0.3);
                 }
               }
@@ -164,19 +165,27 @@ public class Plateau extends JPanel {
           if(mondeDino[i][j]!= null && mondeDino[i][j].type== "Carnivore"){
              if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>0){
                 mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
-                //mondeDino[i][j].pointsVie=0;
                 if (mondeDino[i][j].dinoIsDead()==true){
                 mondeDino[i][j]=null;
                 }
               }
-              if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0 ){
+              int voisins=mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)+mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j);
+             int voiCarni= mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j);
+
+              if(voiCarni>0 ){
                 int [][] positionLibreBis=trouverCaseLibre(i,j);
-              if ( positionLibreBis[0][0]!=0 && positionLibreBis[0][1]!=0){
-                int parcours= (int)(8*Math.random());
+              if ( positionLibreBis[0][0]>0 && positionLibreBis[0][1]>0){
+                int parcours= (int)((8-voisins)*Math.random());
                 mondeDino[positionLibreBis[parcours][0]][positionLibreBis[parcours][1]]= new Carnivore (0.3);
+                System.out.print( "parent en ");
+                System.out.print(i+",");
+                System.out.println(j);
+                System.out.print( "bebe Carn en "+positionLibreBis[parcours][0]+"," );
+                System.out.println(positionLibreBis[parcours][1]);
+
+              }
             }
           }
-        }
         }
       }
     }

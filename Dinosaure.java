@@ -1,4 +1,3 @@
-
 public class Dinosaure {
 
     public String type ; // On indique si c'est un herbivore ou carnivore ( à définir dans les classes filles)
@@ -43,7 +42,7 @@ public class Dinosaure {
 
         public boolean dinoIsDead(){
           boolean isDead=false;
-          if ( pointsVie==0){
+          if ( pointsVie<=0){
             return true;
           }else{
             return false;
