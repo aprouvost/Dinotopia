@@ -20,23 +20,28 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		this.setIconImage(icone);
 		this.monde = vie;
 		this.setTitle("Dinotopia");
-		this.setSize(800,500);
-		this.setLocation(300,200);		//Pour placer la fenêtre au centre de l'écran
+		this.setSize(1366,768);
+		this.setLocation(0,0);		//Pour placer la fenêtre au centre de l'écran
 		this.setResizable(true); 		//Pour empêcher le redimensionnement de la fenêtre  /!\ � changer
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		/**
-		 * Mon panneau Global
-		 */
-
-		this.add(monde);
-
-		this.setVisible(false);		// Pour rendre la fenêtre visible
-
+		
 		/**
 		 * Panneau statistiques
 		 */
-		//new PanStats();
+		PanStats statistiques = new PanStats(monde);
+		statistiques.setBackground(new Color(0,0,0,0));
+		statistiques.setBounds(900, 500, 400, 200);		
+		
+		/**
+		 * Mon panneau Global
+		 */
+		
+		this.add(statistiques);
+		this.add(monde);
+		this.setVisible(false);		// Pour rendre la fenêtre visible
+
+		
 
 	}
 

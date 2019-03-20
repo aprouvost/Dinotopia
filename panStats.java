@@ -10,34 +10,62 @@ public class PanStats extends JPanel implements ActionListener {
 	private JLabel prctgDino;
 	private JLabel prctgVegetaux;
 
-	public PanStats() { //CONSTRUCTEUR
+	public PanStats(Plateau plateau) { //CONSTRUCTEUR
 
-		this.setBackground(new Color(0,0,0,0));
-		this.setBounds(410, 250, 780-410, 480-250);
-		this.setLayout(new GridLayout());
+		this.setLayout(new GridLayout(2,2));
 
 		//JLabels
-		this.compteurTour = new JLabel("Tour n�: ");
-		this.propCarni = new JLabel("Proportion de carnivores :");
-		this.propHerbi = new JLabel("Proportion d'herbivores :");
-		this.prctgDino = new JLabel("Pourcentage de dinosaures :");
-		this.prctgVegetaux = new JLabel("Pourcentage de v�g�taux :");
-
+		this.compteurTour = new JLabel("Tour numero ");
+		this.propCarni = new JLabel("Proportion de carnivores :"+plateau.densiteCarn);
+		this.propHerbi = new JLabel("Proportion d'herbivores :"+plateau.densiteHerb);
+		this.prctgDino = new JLabel("Pourcentage de dinosaures :"+plateau.prop);
+		this.prctgVegetaux = new JLabel("Pourcentage de vegetaux :"+ (1-plateau.prop));
+		
+		this.add(prctgDino) ; this.add(prctgVegetaux) ; this.add(propCarni) ; this.add(propHerbi) ;
 	}
+	
+	//METHODES
+	
+	public void miseAJourStats(Plateau monde) {
+		
+	}
+	
+	
+	//SETTERS
 
 	public void setCompteur(String mess) {
 
 	}
+	public void setCompteur(double numb) {
+
+	}
+	
 	public void setPropCarni(String mess) {
 
 	}
+	public void setPropCarni(double numb) {
+
+	}
+	
 	public void setPropHerbi(String mess) {
 
 	}
+	public void setPropHerbi(double numb) {
+
+	}
+	
 	public void setPrctgDino(String mess) {
 
 	}
+	public void setPrctgDino(double numb) {
+
+	}
+	
 	public void setPrctgVege(String mess) {
+		
+	}
+	public void setPrctgVege(double numb) {
+		
 	}
 
 
