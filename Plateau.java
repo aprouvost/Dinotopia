@@ -135,58 +135,123 @@ public class Plateau extends JPanel {
            return ret;
         }
 
+
+
+
+        /** Parcours du tableau et intéraction entre les différents Herbivores
+        * @param i l'abscisse du dino
+        * @param j l'ordonnée du dino
+        * @return rien, modifie directement le tableau
+        */
+
+        public void interactionHerbi(int i, int j){
+          if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0){
+            mondeDino[i][j].retirerVieDinosaure(  (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
+            if (mondeDino[i][j].dinoIsDead()==true){
+              mondeDino[i][j]=null;
+            }
+          }
+        }
+
+
+
+
+        /** Parcours du tableau et fait des bébés si 2 herbi à cotés
+        * @param i l'abscisse du dino
+        * @param j l'ordonnée du dino
+        * @return rien, modifie directement le tableau
+        */
+        public void bebeHerbi( int i, int j){
+          int voisins=mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)+mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j);
+          int voiHerb=mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j);
+          if(voiHerb>0 ){
+             int [][] positionLibre=trouverCaseLibre(i,j);
+             if ( positionLibre[0][0]!=0 && positionLibre[0][1]!=0){
+
+               int parcours= (int)((8-voisins)*Math.random());
+               mondeDino[positionLibre[parcours][0]][positionLibre[parcours][1]]= new Herbivore (0.3);
+               System.out.print( "parent en ");
+               System.out.print(i+",");
+               System.out.println(j);
+               System.out.print( "bebe Herb en "+positionLibre[parcours][0]+"," );
+               System.out.println(positionLibre[parcours][1]);
+               System.out.println();
+             }
+           }
+        }
+
+
+        /** Parcours du tableau et intéraction entre les différents Carnivores
+        * @param i l'abscisse du dino
+        * @param j l'ordonnée du dino
+        * @return rien, modifie directement le tableau
+        */
+        public void interactionCarni( int i, int j){
+          if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>0){
+             mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
+             if (mondeDino[i][j].dinoIsDead()==true){
+             mondeDino[i][j]=null;
+             }
+           }
+        }
+
+
+
+        /** Parcours du tableau et fait des bébés si 2 carni à cotés
+        * @param i l'abscisse du dino
+        * @param j l'ordonnée du dino
+        * @return rien, modifie directement le tableau
+        */
+
+        public void bebeCarni ( int i, int j){
+
+          int voisins=mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)+mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j);
+         int voiCarni= mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j);
+
+          if(voiCarni>0 ){
+            int [][] positionLibreBis=trouverCaseLibre(i,j);
+          if ( positionLibreBis[0][0]>0 && positionLibreBis[0][1]>0){
+            int parcours= (int)((8-voisins)*Math.random());
+            mondeDino[positionLibreBis[parcours][0]][positionLibreBis[parcours][1]]= new Carnivore (0.3);
+            System.out.print( "parent en ");
+            System.out.print(i+",");
+            System.out.println(j);
+            System.out.print( "bebe Carn en "+positionLibreBis[parcours][0]+"," );
+            System.out.println(positionLibreBis[parcours][1]);
+            System.out.println();
+
+            }
+          }
+        }
+
+
+
+
+
+
         /** Parcours du tableau et intéraction entre les différents dinosaures
         * @param
         * @return rien, modifie directement le tableau
         */
+
   public void  parcoursTab(){
 
     for(int i=0; i<h; i++){
         for(int j=0; j<l;j++){
           if(mondeDino[i][j]!= null && mondeDino[i][j].type== "Herbivore"){
-              if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0){
-                mondeDino[i][j].retirerVieDinosaure(  (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
-                if (mondeDino[i][j].dinoIsDead()==true){
-                  mondeDino[i][j]=null;
-                }
-              }
-              int voisins=mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)+mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j);
-             int voiHerb=mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j);
-             if(voiHerb>0 ){
-                int [][] positionLibre=trouverCaseLibre(i,j);
-                if ( positionLibre[0][0]!=0 && positionLibre[0][1]!=0){
-
-                  int parcours= (int)((8-voisins)*Math.random());
-                  mondeDino[positionLibre[parcours][0]][positionLibre[parcours][1]]= new Herbivore (0.3);
-                }
-              }
+            interactionHerbi(i,j);
+            bebeHerbi(i,j);
             }
 
           if(mondeDino[i][j]!= null && mondeDino[i][j].type== "Carnivore"){
-             if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>0){
-                mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
-                if (mondeDino[i][j].dinoIsDead()==true){
-                mondeDino[i][j]=null;
-                }
-              }
-              int voisins=mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)+mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j);
-             int voiCarni= mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j);
-
-              if(voiCarni>0 ){
-                int [][] positionLibreBis=trouverCaseLibre(i,j);
-              if ( positionLibreBis[0][0]>0 && positionLibreBis[0][1]>0){
-                int parcours= (int)((8-voisins)*Math.random());
-                mondeDino[positionLibreBis[parcours][0]][positionLibreBis[parcours][1]]= new Carnivore (0.3);
-                System.out.print( "parent en ");
-                System.out.print(i+",");
-                System.out.println(j);
-                System.out.print( "bebe Carn en "+positionLibreBis[parcours][0]+"," );
-                System.out.println(positionLibreBis[parcours][1]);
-
-              }
-            }
+             interactionCarni(i,j);
+             bebeCarni(i,j);
           }
         }
       }
     }
-  }
+
+
+
+
+}

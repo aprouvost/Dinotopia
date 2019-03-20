@@ -5,7 +5,7 @@ public class Main{
     public static void main(String[] args){
       int H =25; // hauteur (en nombre de cellules)
       int L = 25; // largeur
-      double P = 0.9; // probabilité de vie d'une cellule
+      double P = 0.05; // probabilité de vie d'une cellule
       double pp= 0.5;
       double ppp= 1-pp;
       Plateau  vie= new Plateau ( H,L,P,pp);
