@@ -25,6 +25,12 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		this.setResizable(true); 		//Pour empêcher le redimensionnement de la fenêtre  /!\ � changer
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		/**
+		 * Panneau evenements
+		 */
+		PanEvent events = new PanEvent(monde);
+		events.setBackground(new Color(0,0,0,0));
+		events.setBounds(900, 100, 400, 200);
 		
 		/**
 		 * Panneau statistiques
@@ -36,7 +42,7 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		/**
 		 * Mon panneau Global
 		 */
-		
+		this.add(events);
 		this.add(statistiques);
 		this.add(monde);
 		this.setVisible(false);		// Pour rendre la fenêtre visible

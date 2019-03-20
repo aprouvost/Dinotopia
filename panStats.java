@@ -11,15 +11,15 @@ public class PanStats extends JPanel implements ActionListener {
 	private JLabel prctgVegetaux;
 
 	public PanStats(Plateau plateau) { //CONSTRUCTEUR
-
-		this.setLayout(new GridLayout(2,2));
+		
+		this.setLayout(new GridLayout(2,2,5,5));
 
 		//JLabels
 		this.compteurTour = new JLabel("Tour numero ");
-		this.propCarni = new JLabel("Proportion de carnivores :"+plateau.densiteCarn);
-		this.propHerbi = new JLabel("Proportion d'herbivores :"+plateau.densiteHerb);
-		this.prctgDino = new JLabel("Pourcentage de dinosaures :"+plateau.prop);
-		this.prctgVegetaux = new JLabel("Pourcentage de vegetaux :"+ (1-plateau.prop));
+		this.propCarni = new JLabel("Proportion de carnivores : ");
+		this.propHerbi = new JLabel("Proportion d'herbivores : ");
+		this.prctgDino = new JLabel("Pourcentage de dinosaures : ");
+		this.prctgVegetaux = new JLabel("Pourcentage de vegetaux : ");
 		
 		this.add(prctgDino) ; this.add(prctgVegetaux) ; this.add(propCarni) ; this.add(propHerbi) ;
 	}
@@ -27,7 +27,11 @@ public class PanStats extends JPanel implements ActionListener {
 	//METHODES
 	
 	public void miseAJourStats(Plateau monde) {
-		
+		this.compteurTour.setText("Tour numero ");
+		this.propCarni.setText("Proportion de carnivores : ");
+		this.propHerbi.setText("Proportion d'herbivores : ");
+		this.prctgDino.setText("Pourcentage de dinosaures : ");
+		this.prctgVegetaux.setText("Pourcentage de vegetaux : ");
 	}
 	
 	
