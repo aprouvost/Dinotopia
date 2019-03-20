@@ -113,7 +113,7 @@ public class Plateau extends JPanel {
       int nombre=0; // nombre de cases libres trouvées
       for(int i =x-1; i <= x+1; i++){
           for(int k = y-1; k<= y+1; k++){
-              if(i>0 && k>0 && i<20 && k<20 && mondeDino[i][k].outOfBounds(mondeDino,i,k) == false && (i == x) ==false &&( k == y)== false){
+              if(i>0 && k>0 && i<l && k<h && mondeDino[i][k].outOfBounds(mondeDino,i,k) == false && (i == x) ==false &&( k == y)== false){
                   if(mondeDino[i][k] == null )
                        tab[nombre][0]=i;
                        tab[nombre][1]=k;
@@ -166,17 +166,17 @@ public class Plateau extends JPanel {
           int voiHerb=mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j);
           if(voiHerb>0 ){
              int [][] positionLibre=trouverCaseLibre(i,j);
-             if ( positionLibre[0][0]!=0 && positionLibre[0][1]!=0){
+             //if ( positionLibre[0][0]!=0 && positionLibre[0][1]!=0){
 
                int parcours= (int)((8-voisins)*Math.random());
                mondeDino[positionLibre[parcours][0]][positionLibre[parcours][1]]= new Herbivore (0.3);
-               System.out.print( "parent en ");
+               /*System.out.print( "parent en ");
                System.out.print(i+",");
                System.out.println(j);
                System.out.print( "bebe Herb en "+positionLibre[parcours][0]+"," );
                System.out.println(positionLibre[parcours][1]);
-               System.out.println();
-             }
+               System.out.println();*/
+             
            }
         }
 
@@ -210,17 +210,17 @@ public class Plateau extends JPanel {
 
           if(voiCarni>0 ){
             int [][] positionLibreBis=trouverCaseLibre(i,j);
-          if ( positionLibreBis[0][0]>0 && positionLibreBis[0][1]>0){
+         // if ( positionLibreBis[0][0]>0 && positionLibreBis[0][1]>0){
             int parcours= (int)((8-voisins)*Math.random());
             mondeDino[positionLibreBis[parcours][0]][positionLibreBis[parcours][1]]= new Carnivore (0.3);
-            System.out.print( "parent en ");
+            /*System.out.print( "parent en ");
             System.out.print(i+",");
             System.out.println(j);
             System.out.print( "bebe Carn en "+positionLibreBis[parcours][0]+"," );
             System.out.println(positionLibreBis[parcours][1]);
-            System.out.println();
+            System.out.println();*/
 
-            }
+            
           }
         }
 
