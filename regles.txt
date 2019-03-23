@@ -1,4 +1,9 @@
-BIENVENUE A DINOTOPIA
-Dinotopia est un jeu de dynamique de populations.
-Votre but est de maintenant de configurer votre monde et de le maintenir en vie le plus longtemps possible.
+Bienvenue à Dinotopia !
+Dinotopia est un jeu de la vie, le but est donc de simuler une population et voir son évolution.
+En début de jeu, tu décides combien de dinosaures carnivores et herbivores vont évoluer sur le plateau à partir des densités. Pour cela, utilise les boutons ci-dessous. Une fois cela choisi, le jeu se lance et tu pourras observer différentes situations entre dinosaures voisins :
+•	deux dinosaures se rencontrent (i.e. ils sont voisins) et se battent
+•	si les deux dinosaures sont de la même espèce, après s’être battus, ils se reproduisent
 
+En résumé, il va y avoir tout le temps des actions. Les dinosaures ont des points de vie et peuvent en perdre plus ou moins selon les diverses actions.
+C’est à toi de faire les bons choix pour avoir une population équilibrée et qui perdure.
+Bonne chance !

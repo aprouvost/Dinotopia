@@ -3,8 +3,8 @@ import java.util.Scanner;
 public class Main{
 
     public static void main(String[] args){
-      int H =15; // hauteur (en nombre de cellules)
-      int L = 15; // largeur
+      int H =20; // hauteur (en nombre de cellules)
+      int L = 20; // largeur
       double P = 0.2; // probabilité de vie d'une cellule
       double pp= 0.5;
       double ppp= 1-pp;

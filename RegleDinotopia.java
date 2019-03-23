@@ -27,12 +27,17 @@ public class RegleDinotopia extends JFrame implements ActionListener {
     		this.setLocation(100,50);
     		this.setResizable(false);
     		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        try{
+          this.pan = new PanelB("img/Regles.jpg");
+        }
+        catch(IOException e) {
+          e.printStackTrace();
+        }
 
         JPanel conteneur = new JPanel();
         conteneur.setLayout(null);
-        conteneur.setSize(1200,650);
-        conteneur.setLocation(150,80);
+        conteneur.setSize(1200,550);
+        conteneur.setLocation(150,50);
         conteneur.setBackground(new Color(0,0,0,97));
 
         boutonLancement = new JButton ("J'ai compris les regles, je souhaite lancer ma partie");
@@ -40,8 +45,6 @@ public class RegleDinotopia extends JFrame implements ActionListener {
         boutonLancement.setLocation(300,400);
         boutonLancement.setBackground(Color.white);
         boutonLancement.addActionListener(this);
-
-
 
         JLabel texteRegles = new JLabel("");
         JLabel texteRegles2 = new JLabel("");
@@ -72,29 +75,25 @@ public class RegleDinotopia extends JFrame implements ActionListener {
           System.out.println(e.toString());
         }
         texteRegles2.setText(msg);
-        texteRegles.setFont(new Font("TimesRoman",Font.BOLD+Font.ITALIC,20));
-        texteRegles.setForeground(Color.white);
-        texteRegles.setSize(550,200);
-        texteRegles.setLocation(50,-50);
         texteRegles2.setFont(new Font("TimesRoman",Font.BOLD,15));
         texteRegles2.setForeground(Color.white);
-        texteRegles2.setSize(1000,200);
-        texteRegles2.setLocation(100,150);
+        texteRegles2.setSize(1200,400);
+        texteRegles2.setLocation(100,0);
 
-        conteneur.add(texteRegles);
-        conteneur.add(texteRegles2);
-        conteneur.add(boutonLancement);
+        texteRegles.setFont(new Font("TimesRoman",Font.BOLD+Font.ITALIC,20));
+        texteRegles.setForeground(Color.white);
+        texteRegles.setSize(550,100);
+        texteRegles.setLocation(150,20);
 
-        try{
-          this.pan = new PanelB("img/Regles.jpg");
-        }
-        catch(IOException e) {
-          e.printStackTrace();
-        }
         this.add(conteneur);
+        conteneur.add(texteRegles);
+        conteneur.add(boutonLancement);
+        conteneur.add(texteRegles2);
+
         this.add(pan);
         this.setVisible(true);
-  }
+
+      }
 
       public void actionPerformed (ActionEvent e){
         if (e.getSource() == boutonLancement){

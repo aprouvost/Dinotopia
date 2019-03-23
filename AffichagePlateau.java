@@ -31,14 +31,14 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		PanEvent events = new PanEvent(monde);
 		events.setBackground(new Color(0,0,0,0));
 		events.setBounds(900, 100, 400, 200);
-		
+
 		/**
 		 * Panneau statistiques
 		 */
 		PanStats statistiques = new PanStats(monde);
 		statistiques.setBackground(new Color(0,0,0,0));
-		statistiques.setBounds(900, 500, 400, 200);		
-		
+		statistiques.setBounds(900, 500, 400, 200);
+
 		/**
 		 * Mon panneau Global
 		 */
@@ -47,7 +47,6 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		this.add(monde);
 		this.setVisible(false);		// Pour rendre la fenêtre visible
 
-		
 
 	}
 
