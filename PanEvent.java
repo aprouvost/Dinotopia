@@ -4,36 +4,37 @@ import javax.swing.*;
 
 public class PanEvent extends JPanel implements ActionListener{
 
-	JButton Bout1;
-	JButton Bout2;
-	JButton Bout3;
+	JButton bout1;
+	JButton bout2;
+	JButton bout3;
+	Plateau plat;
 
-	
+
 	public PanEvent(Plateau plateau) {
-		
+		this.plat = plateau;
+
 		this.setLayout(new GridLayout(3,1,5,5));
-		
-		Bout1 = new JButton("yes");
-		Bout2 = new JButton("yes");
-		Bout3 = new JButton("yes");
-		
-		this.add(Bout1) ; this.add(Bout2) ; this.add(Bout3) ;
-		
+		bout1 = new JButton("Montee Des Eaux");
+		bout2 = new JButton("Meteorite");
+		bout3 = new JButton("Secheresse");
+		bout1.addActionListener(this);
+		bout2.addActionListener(this);
+		bout3.addActionListener(this);
+		this.add(bout1) ; this.add(bout2) ; this.add(bout3) ;
+
 	}
 
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==Bout1) {  //BOUTON1
-			
-		}else {	
-			if(e.getSource() == Bout2) {	//BOUTON2
-			
-			}else {	//BOUTON3
-				
-			}
-			
+		if(e.getSource()==bout1) {  //BOUTON1
+
 		}
-		
+		else if(e.getSource() == bout2) {	//BOUTON2
+
+		}
+		else {	//BOUTON3
+
+		}
 	}
 
 }

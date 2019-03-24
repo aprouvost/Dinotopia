@@ -14,8 +14,8 @@ public class Event{ // Cette classe regroupe les différents Event que l'utilisa
     /*for (int i=0; i<l; i++){
       for (int j=0; j<h; j++){
         if ( monde[i][j].type= "Herbivore"){
-          mode[i][j].retirerVieDinosaure(20);*/
-        }
+          mode[i][j].retirerVieDinosaure(20);
+        }*/
 
   }
 

@@ -68,14 +68,14 @@ public class Plateau extends JPanel {
             for(int j=0; j<l;j++){
               if (mondeDino[i][j]!=null){
                 if (mondeDino[i][j].type=="Herbivore"){
-                  g.drawImage(ImageIO.read(new File("img/dino1.png")),(40+i*(h-2)),(40+j*(l-2)),this);
+                  g.drawImage(ImageIO.read(new File("img/dino2.png")),(80+i*(h*2-10)),(40+j*(l*2-10)),this);
                 }
                 else{
-                  g.drawImage(ImageIO.read(new File("img/dino1.png")),(40+i*(h-2)),(40+j*(l-2)),this);
+                  g.drawImage(ImageIO.read(new File("img/dino1.png")),(80+i*(h*2-10)),(40+j*(l*2-10)),this);
                 }
               }
               else{
-                g.drawImage(ImageIO.read(new File("img/herbe3.jpg")),(40+i*(h-2)),(40+j*(l-2)),this);
+                g.drawImage(ImageIO.read(new File("img/herbe3.jpg")),(80+i*(h*2-10)),(40+j*(l*2-10)),this);
               }
           }
         }
@@ -84,6 +84,13 @@ public class Plateau extends JPanel {
         e.printStackTrace();
       }
     }
+
+    public void AffichePlateau(){
+  		this.setVisible(true);
+  	}
+    public void CachePlateau(){
+  		this.setVisible(false);
+  	}
 
 // Permet effacer le terminal
     public static void effaceEcran() {
@@ -235,7 +242,7 @@ public class Plateau extends JPanel {
         * @return rien, modifie directement le tableau
         */
 
-  public void  parcoursTab(){
+  public void parcoursTab(){
 
     for(int i=0; i<h; i++){
         for(int j=0; j<l;j++){
