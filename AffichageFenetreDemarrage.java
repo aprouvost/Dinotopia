@@ -41,14 +41,17 @@ public class AffichageFenetreDemarrage extends JFrame implements ActionListener 
         conteneur.setLayout(null);
         conteneur.setSize(100,100);
         conteneur.setLocation(30,30);
-        boutonLancement = new JButton ("Demarrer une nouvelle partie");
-        boutonLancement.setSize(200,100);
-        boutonLancement.setLocation(300,200);
-        boutonLancement.setBackground(Color.white);
+        boutonLancement = new JButton ("");
+        boutonLancement.setFont(new Font("ArialBlack",Font.BOLD,15));
+        boutonLancement.setText("Nouvelle Partie");
+        boutonLancement.setSize(270,50);
+        boutonLancement.setLocation(250,215);
         boutonLancement.addActionListener(this);
-        conteneur.add(boutonLancement);
         this.setVisible(true);
+
         this.add(conteneur);
+        conteneur.add(boutonLancement);
+
   }
 
 

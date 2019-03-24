@@ -19,81 +19,83 @@ public class RegleDinotopia extends JFrame implements ActionListener {
     private AffichagePlateau p;
 
     public RegleDinotopia(AffichagePlateau p){
-        Image icone = Toolkit.getDefaultToolkit().getImage("img/skull.jpg");
-        this.setIconImage(icone);
-        this.p = p;
-        this.setTitle(" Regles de Dinotopia");
-        this.setSize(1500,640);
-    		this.setLocation(100,50);
-    		this.setResizable(false);
-    		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      JLabel texteRegles = new JLabel("");
+      JLabel texteRegles2 = new JLabel("");
+      String ligne ="";
+      String msg ="<html>";
+      int i=0;
+      try{
+        BufferedReader lecteurAvecBuffer = null;
         try{
-          this.pan = new PanelB("img/Regles.jpg");
+           lecteurAvecBuffer = new BufferedReader(new FileReader(new File("regles.txt")));
         }
-        catch(IOException e) {
-          e.printStackTrace();
-        }
-
-        JPanel conteneur = new JPanel();
-        conteneur.setLayout(null);
-        conteneur.setSize(1200,550);
-        conteneur.setLocation(150,50);
-        conteneur.setBackground(new Color(0,0,0,97));
-
-        boutonLancement = new JButton ("J'ai compris les regles, je souhaite lancer ma partie");
-        boutonLancement.setSize(500,70);
-        boutonLancement.setLocation(300,400);
-        boutonLancement.setBackground(Color.white);
-        boutonLancement.addActionListener(this);
-
-        JLabel texteRegles = new JLabel("");
-        JLabel texteRegles2 = new JLabel("");
-        String ligne ="";
-        String msg ="<html>";
-        int i=0;
-        try{
-          BufferedReader lecteurAvecBuffer = null;
-          try{
-      	     lecteurAvecBuffer = new BufferedReader(new FileReader(new File("regles.txt")));
+        catch(FileNotFoundException exc)
+          {
+             System.out.println("Erreur d'ouverture");
           }
-          catch(FileNotFoundException exc)
-            {
-      	       System.out.println("Erreur d'ouverture");
-            }
-          while ((ligne = lecteurAvecBuffer.readLine()) != null)
-            if(i == 0){
-              texteRegles.setText(ligne);
-              i++;
-            }
-            else if(i != 0){
-              msg += ligne + "<br>";
-            }
-            lecteurAvecBuffer.close();
-            msg += "</html>";
+        while ((ligne = lecteurAvecBuffer.readLine()) != null)
+          if(i == 0){
+            texteRegles.setText(ligne);
+            i++;
           }
-        catch (Exception e){
-          System.out.println(e.toString());
+          else if(i != 0){
+            msg += ligne + "<br>";
+          }
+          lecteurAvecBuffer.close();
+          msg += "</html>";
         }
-        texteRegles2.setText(msg);
-        texteRegles2.setFont(new Font("TimesRoman",Font.BOLD,15));
-        texteRegles2.setForeground(Color.white);
-        texteRegles2.setSize(1200,400);
-        texteRegles2.setLocation(100,0);
-
-        texteRegles.setFont(new Font("TimesRoman",Font.BOLD+Font.ITALIC,20));
-        texteRegles.setForeground(Color.white);
-        texteRegles.setSize(550,100);
-        texteRegles.setLocation(150,20);
-
-        this.add(conteneur);
-        conteneur.add(texteRegles);
-        conteneur.add(boutonLancement);
-        conteneur.add(texteRegles2);
-
-        this.add(pan);
-        this.setVisible(true);
-
+      catch (Exception e){
+        System.out.println(e.toString());
       }
+
+
+      Image icone = Toolkit.getDefaultToolkit().getImage("img/skull.jpg");
+      this.setIconImage(icone);
+      this.p = p;
+      this.setTitle(" Regles de Dinotopia");
+      this.setSize(1500,640);
+  		this.setLocation(100,50);
+  		this.setResizable(false);
+  		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      try{
+        this.pan = new PanelB("img/Regles.jpg");
+      }
+      catch(IOException e) {
+        e.printStackTrace();
+      }
+
+      JPanel conteneur = new JPanel();
+      conteneur.setLayout(null);
+      conteneur.setSize(1200,550);
+      conteneur.setLocation(150,50);
+      conteneur.setBackground(new Color(0,0,0,97));
+
+      boutonLancement = new JButton ("J'ai compris les regles, je souhaite lancer ma partie");
+      boutonLancement.setSize(500,70);
+      boutonLancement.setLocation(300,400);
+      boutonLancement.setBackground(Color.white);
+      boutonLancement.addActionListener(this);
+      texteRegles2.setSize(1200,400);
+      texteRegles2.setLocation(100,0);
+      texteRegles2.setText(msg);
+      texteRegles2.setFont(new Font("TimesRoman",Font.BOLD,15));
+      texteRegles2.setForeground(Color.white);
+      texteRegles2.setBackground(Color.white);
+      texteRegles.setSize(550,100);
+      texteRegles.setLocation(150,20);
+      texteRegles.setFont(new Font("TimesRoman",Font.BOLD+Font.ITALIC,20));
+      texteRegles.setForeground(Color.white);
+
+
+      this.add(conteneur);
+      conteneur.add(texteRegles);
+      conteneur.add(boutonLancement);
+      conteneur.add(texteRegles2);
+
+      this.add(pan);
+      this.setVisible(true);
+
+    }
 
       public void actionPerformed (ActionEvent e){
         if (e.getSource() == boutonLancement){
