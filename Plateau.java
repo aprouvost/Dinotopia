@@ -153,12 +153,12 @@ public class Plateau extends JPanel {
         */
 
         public void interactionHerbi(int i, int j){
-          if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0){
-            mondeDino[i][j].retirerVieDinosaure(  (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
+        //  if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0){
+            mondeDino[i][j].retirerVieDinosaure(1+ (int)(Math.random()*32)+ (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
             if (mondeDino[i][j].dinoIsDead()==true){
               mondeDino[i][j]=null;
             }
-          }
+        //  }
         }
 
 
@@ -172,7 +172,7 @@ public class Plateau extends JPanel {
         public void bebeHerbi( int i, int j){
           int voisins=mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)+mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j);
           int voiHerb=mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j);
-          if(voiHerb>0 ){
+          if(voiHerb>1 ){
              int [][] positionLibre=trouverCaseLibre(i,j);
              //if ( positionLibre[0][0]!=0 && positionLibre[0][1]!=0){
 
@@ -195,12 +195,12 @@ public class Plateau extends JPanel {
         * @return rien, modifie directement le tableau
         */
         public void interactionCarni( int i, int j){
-          if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>0){
-             mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
+        //  if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>0){
+             mondeDino[i][j].retirerVieDinosaure( (int)(Math.random()*32)+(mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
              if (mondeDino[i][j].dinoIsDead()==true){
              mondeDino[i][j]=null;
              }
-           }
+        //   }
         }
 
 
@@ -216,7 +216,7 @@ public class Plateau extends JPanel {
           int voisins=mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)+mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j);
          int voiCarni= mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j);
 
-          if(voiCarni>0 ){
+          if(voiCarni>1 ){
             int [][] positionLibreBis=trouverCaseLibre(i,j);
          // if ( positionLibreBis[0][0]>0 && positionLibreBis[0][1]>0){
             int parcours= (int)((8-voisins)*Math.random());
