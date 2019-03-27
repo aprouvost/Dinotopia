@@ -154,7 +154,7 @@ public class Plateau extends JPanel {
 
         public void interactionHerbi(int i, int j){
         //  if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0){
-            mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
+            mondeDino[i][j].retirerVieDinosaure( ((mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)))+((mondeDino[i][j].chanceHerb)*(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j))));
             if (mondeDino[i][j].dinoIsDead()==true){
               mondeDino[i][j]=null;
             }
@@ -196,7 +196,7 @@ public class Plateau extends JPanel {
         */
         public void interactionCarni( int i, int j){
         //  if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>0){
-             mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
+             mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceHerb)*(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j))+(mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
              if (mondeDino[i][j].dinoIsDead()==true){
              mondeDino[i][j]=null;
              }
@@ -280,4 +280,3 @@ public class Plateau extends JPanel {
 
 
 }
-  
