@@ -61,6 +61,10 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 	public void AffichePlateau(){
 		this.setVisible(true);
 	}
+	
+	public int getCompteur() {
+		return compt;
+	}
 
 
 	/**
