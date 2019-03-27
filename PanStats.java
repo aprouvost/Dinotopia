@@ -9,29 +9,49 @@ public class PanStats extends JPanel implements ActionListener {
 	private JLabel propHerbi;
 	private JLabel prctgDino;
 	private JLabel prctgVegetaux;
+	public Font policeStats;
 
 	public PanStats(Plateau plateau) { //CONSTRUCTEUR
 		
-		this.setLayout(new GridLayout(2,2,5,5));
+		this.setLayout(new GridLayout(3,2,5,5));
+		
+		//police :
+		policeStats = new Font("Arial", 15 , 15);
 
 		//JLabels
 		this.compteurTour = new JLabel("Tour numero ");
-		this.propCarni = new JLabel("Proportion de carnivores : ");
-		this.propHerbi = new JLabel("Proportion d'herbivores : ");
-		this.prctgDino = new JLabel("Pourcentage de dinosaures : ");
-		this.prctgVegetaux = new JLabel("Pourcentage de vegetaux : ");
+		this.compteurTour.setFont(policeStats);
 		
-		this.add(prctgDino) ; this.add(prctgVegetaux) ; this.add(propCarni) ; this.add(propHerbi) ;
+		this.propCarni = new JLabel("<html>Proportion de carnivores :<br>"+plateau.getDensiteCarn()*100+"%</html>");
+		this.propCarni.setFont(policeStats);
+		
+		this.propHerbi = new JLabel("<html>Proportion d'herbivores :<br>"+plateau.getDensiteHerb()*100+"%</html>");
+		this.propHerbi.setFont(policeStats);
+		
+		this.prctgDino = new JLabel("<html>Pourcentage de dinosaures :<br>"+plateau.getProp()*100+"%</html>");
+		this.prctgDino.setFont(policeStats);
+		
+		this.prctgVegetaux = new JLabel("<html>Pourcentage de vegetaux :<br>"+(1.0-plateau.getProp())*100+"%</html>");
+		this.prctgVegetaux.setFont(policeStats);
+		
+		
+		this.add(prctgDino) ; this.add(prctgVegetaux) ; this.add(propCarni) ; this.add(propHerbi) ; this.add(compteurTour);
+		
+		
 	}
 	
 	//METHODES
 	
+	/**
+	 * Mise à jour du panneau des statistiques, à appeler à chaque tour/itération.
+	 * @param monde
+	 */
 	public void miseAJourStats(Plateau monde) {
 		this.compteurTour.setText("Tour numero ");
-		this.propCarni.setText("Proportion de carnivores : ");
-		this.propHerbi.setText("Proportion d'herbivores : ");
-		this.prctgDino.setText("Pourcentage de dinosaures : ");
-		this.prctgVegetaux.setText("Pourcentage de vegetaux : ");
+		this.propCarni.setText("<html>Proportion de carnivores :<br>"+monde.getDensiteCarn()*100+"%</html>");
+		this.propHerbi.setText("<html>Proportion d'herbivores :<br>"+monde.getDensiteHerb()*100+"%</html>");
+		this.prctgDino.setText("<html>Pourcentage de dinosaures :<br>"+monde.getProp()*100+"%</html>");
+		this.prctgVegetaux.setText("<html>Pourcentage de vegetaux :<br>"+(1.0-monde.getProp())*100+"%</html>");
 	}
 	
 	
