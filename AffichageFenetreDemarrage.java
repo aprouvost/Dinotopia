@@ -58,8 +58,7 @@ public class AffichageFenetreDemarrage extends JFrame implements ActionListener 
 
   public void actionPerformed (ActionEvent e){
     if (e.getSource() == boutonLancement){
-      AffichagePlateau p = new AffichagePlateau(vie);
-      new RegleDinotopia(p);
+      new Joueur(vie);
       this.setVisible(false);
   }
 }
