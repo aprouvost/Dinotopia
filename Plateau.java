@@ -154,7 +154,7 @@ public class Plateau extends JPanel {
 
         public void interactionHerbi(int i, int j){
         //  if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0){
-            mondeDino[i][j].retirerVieDinosaure(1+ (int)(Math.random()*32)+ (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
+            mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
             if (mondeDino[i][j].dinoIsDead()==true){
               mondeDino[i][j]=null;
             }
@@ -196,7 +196,7 @@ public class Plateau extends JPanel {
         */
         public void interactionCarni( int i, int j){
         //  if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>0){
-             mondeDino[i][j].retirerVieDinosaure( (int)(Math.random()*32)+(mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
+             mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
              if (mondeDino[i][j].dinoIsDead()==true){
              mondeDino[i][j]=null;
              }
@@ -227,15 +227,8 @@ public class Plateau extends JPanel {
             System.out.print( "bebe Carn en "+positionLibreBis[parcours][0]+"," );
             System.out.println(positionLibreBis[parcours][1]);
             System.out.println();*/
-
-
           }
         }
-
-
-
-
-
 
         /** Parcours du tableau et intéraction entre les différents dinosaures
         * @param
@@ -259,7 +252,32 @@ public class Plateau extends JPanel {
       }
     }
 
+    public int getH() {
+	  return h;
+  }
+
+  public int getL() {
+	  return l;
+  }
+
+  public double getProp() {
+	  return prop;
+  }
+
+  public double getDensiteHerb() {
+	  return densiteHerb;
+  }
+
+  public double getDensiteCarn() {
+	  return densiteCarn;
+  }
+
+  public Dinosaure [][] getMondeDino() {
+	  return mondeDino;
+  }
+
 
 
 
 }
+  
