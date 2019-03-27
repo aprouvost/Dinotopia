@@ -284,6 +284,10 @@ public class Plateau extends JPanel {
     compteurTour++;
   }
 
+  public int getCompteur(){
+    return compteurTour;
+  }
+
 /*  public boolean leMondeEstStable() {
 	  boolean a = false;
 	  if(mondeVivant()==true) {
