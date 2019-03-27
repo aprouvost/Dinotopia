@@ -280,6 +280,9 @@ public class Plateau extends JPanel {
   public Dinosaure [][] getMondeDino() {
 	  return mondeDino;
   }
+  public void compteurPlus(){
+    compteurTour++;
+  }
 
 /*  public boolean leMondeEstStable() {
 	  boolean a = false;
