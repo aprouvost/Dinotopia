@@ -5,7 +5,7 @@ public class Main{
     public static void main(String[] args){
       int H =20; // hauteur (en nombre de cellules)
       int L = 20; // largeur
-      double P = 0.01; // probabilité de vie d'une cellule
+      double P = 0.2; // probabilité de vie d'une cellule
       double pp= 0.5;
       double ppp= 1-pp;
       Plateau  vie= new Plateau ( H,L,P,pp);
@@ -38,15 +38,15 @@ public class Main{
 
 
       boolean vivant= vie.mondeVivant(); // Je vérifie qu'il y ait au moins un dino sur le plateau pour âsser au tour suivant
-  //    boolean estStable = vie.leMondeEstStable();
 
-       while(vivant == true  /*&& estStable == false*/) {
-         vie.parcoursTab();
-         vivant= vie.mondeVivant();
-         vie.compteurTour++;
-         System.out.println(vie.compteurTour);
-      //   estStable=vie.leMondeEstStable();
-       }
+        vie.parcoursTab();
+        vivant= vie.mondeVivant();
+        int [][] positionLibreBis=vie.trouverCaseLibre(0,0);
+        if ( positionLibreBis[0][0]!=0 && positionLibreBis[0][1]!=0){
+            int parcours= (int)(8*Math.random());
+            monde[positionLibreBis[parcours][0]][positionLibreBis[parcours][1]]= new Carnivore (0.3);
+          }
+
 
         System.out.print("+");
         for(int j=0; j<L;j++)

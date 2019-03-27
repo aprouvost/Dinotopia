@@ -18,6 +18,13 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 	private JButton bout1;
 	private int compt;
 	private int l;
+	
+	//Attributs panEvent :
+	public JButton monteeEau;
+	public JButton meteorite;
+	public JButton secheresse;
+	public Plateau plat;
+	public Event evenement;
 
 
 
@@ -30,18 +37,33 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		this.setLocation(0,0);		//Pour placer la fenêtre au centre de l'écran
 		this.setResizable(false); 		//Pour empêcher le redimensionnement de la fenêtre  /!\ � changer
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		/**
 		 * Panneau evenements
 		 */
-		PanEvent events = new PanEvent(monde);
+		JPanel events = new JPanel();
 		events.setBackground(new Color(0,0,0,0));
 		events.setBounds(900, 100, 400, 200);
+		
+		this.evenement = new Event(plat);
+		
+		events.setLayout(new GridLayout(3,1,5,5));
+		monteeEau = new JButton("Montee Des Eaux");
+		meteorite = new JButton("Meteorite");
+		secheresse = new JButton("Secheresse");
+		monteeEau.addActionListener(this);
+		meteorite.addActionListener(this);
+		secheresse.addActionListener(this);
+		
+		events.add(monteeEau) ; events.add(meteorite) ; events.add(secheresse) ;
+		
 		/**
 		 * Panneau statistiques
 		 */
 		PanStats statistiques = new PanStats(monde);
 		statistiques.setBackground(new Color(0,0,0,0));
 		statistiques.setBounds(900, 500, 400, 200);
+		
 		/**
 		 * Mon panneau Global
 		 */
@@ -61,10 +83,6 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 	public void AffichePlateau(){
 		this.setVisible(true);
 	}
-	
-	public int getCompteur() {
-		return compt;
-	}
 
 
 	/**
@@ -75,7 +93,27 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 			monde.CachePlateau();
 			monde.parcoursTab();
 			monde.AffichePlateau();
-			compt++;
+			monde.compteurPlus();
+		}
+		
+		//BOUTONS EVENEMENTS :
+		if(e.getSource()==monteeEau) {  //Montee des eaux
+			monde.CachePlateau();
+			evenement.monteeDesEaux();
+			monde.AffichePlateau();
+			monde.compteurPlus();
+		}
+		else if(e.getSource() == meteorite) {	//Meteorite
+			monde.CachePlateau();
+			evenement.meteorite();
+			monde.AffichePlateau();
+			monde.compteurPlus();
+		}
+		else {	//Secheresse
+			monde.CachePlateau();
+			evenement.secheresse();
+			monde.AffichePlateau();
+			monde.compteurPlus();
 		}
 	}
 }

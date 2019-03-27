@@ -1,22 +1,23 @@
 
 public class Event {
 
-	  private Dinosaure [][] monde;
+	  private Plateau plateau;
 	  private int h;
 	  private int l;
 
-	  public Event(){}
-
+	  public Event(Plateau monde){
+	  	  this.plateau = monde;
+	  }
 
 
 	  public void monteeDesEaux(){
 		  for (int i=0; i<l; i++){
 			  for (int j=0; j<h; j++){
-				  if ( monde[i][j].type == "Herbivore"){
-					  monde[i][j].retirerVieDinosaure(20);
+				  if ( this.plateau.mondeDino[i][j].type == "Herbivore"){
+					  this.plateau.mondeDino[i][j].retirerVieDinosaure(20);
 				  }
 				  else {
-					  monde[i][j].retirerVieDinosaure(50);
+					  this.plateau.mondeDino[i][j].retirerVieDinosaure(50);
 				  }
 			  }
 		  }
@@ -26,7 +27,7 @@ public class Event {
 	  public void meteorite(){
 		  for (int i=0; i<l; i++){
 			  for (int j=0; j<h; j++){
-				  monde[i][j].retirerVieDinosaure(50);
+				  this.plateau.mondeDino[i][j].retirerVieDinosaure(50);
 			  }
 		  }
 	  }
@@ -35,11 +36,11 @@ public class Event {
 	  public void secheresse(){
 		  for (int i=0; i<l; i++){
 			  for (int j=0; j<h; j++){
-				  if ( monde[i][j].type == "Herbivore"){
-					  monde[i][j].retirerVieDinosaure(50);
+				  if ( this.plateau.mondeDino[i][j].type == "Herbivore"){
+					  this.plateau.mondeDino[i][j].retirerVieDinosaure(50);
 				  }
 				  else {
-					  monde[i][j].retirerVieDinosaure(20);
+					  this.plateau.mondeDino[i][j].retirerVieDinosaure(20);
 				  }
 			  }
 		  }
