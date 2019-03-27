@@ -7,17 +7,22 @@ import javax.imageio.ImageIO;
 public class Plateau extends JPanel {
 
   // Besoin prendre en compte tous les éléments pour la mise en place du monde sur l'IHM ( tel que la température  etc, ce dont on a parlé dans le cahier des charges)
-    private int h ; // nombre de lignes du tableau ( hauteur)
-    private int l; //nombre de colonnes du tableau ( largeur)
+    public int h ; // nombre de lignes du tableau ( hauteur)
+    public int l; //nombre de colonnes du tableau ( largeur)
     public double densiteHerb;
     public double prop;
+    public double propavant;
+    public double propavantavant;
     public double densiteCarn;
     public Dinosaure [][] mondeDino;
+    public int compteurTour;
 
     public Plateau ( int h, int l , double prop, double densiteHerb){
       this.h=h;
       this.l=l;
       this.prop= prop;
+      this.propavant = prop;
+     this.propavantavant = prop;
       this.densiteHerb= densiteHerb;
       this.densiteCarn=1- densiteHerb;
       mondeDino= genererMondeAleatoire(h,l, prop, densiteHerb);
@@ -275,6 +280,33 @@ public class Plateau extends JPanel {
   public Dinosaure [][] getMondeDino() {
 	  return mondeDino;
   }
+
+/*  public boolean leMondeEstStable() {
+	  boolean a = false;
+	  if(mondeVivant()==true) {
+		  double vivants = 0;
+		  for (int i=0; i<l; i++){
+			  for (int j=0; j<h; j++){
+				  if(mondeDino[i][j]!=null) {
+					  vivants++;
+				  }
+
+			  }
+		  }
+		  propavantavant = propavant;
+		  propavant = prop;
+		  prop = vivants/h*l;
+	  }
+
+
+
+	  if(prop==propavant && prop==propavantavant) {
+		  a = true;
+      System.out.println("Stable");
+	  }
+	  return a;
+
+  }*/
 
 
 
