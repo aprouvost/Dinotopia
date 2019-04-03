@@ -8,7 +8,7 @@ public class Main{
       /*double P = 0.01; // probabilité de vie d'une cellule
       double pp= 0.5;
       double ppp= 1-pp;*/
-      Plateau  vie= new Plateau ( H,L,0,0);
+      Plateau  vie= new Plateau ( H,L,0.5,0.6);
 
       new AffichageFenetreDemarrage(vie);
       Dinosaure[][] monde=vie.mondeDino;

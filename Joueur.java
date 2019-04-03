@@ -13,19 +13,32 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.*;
 
-public class Joueur extends JFrame implements ActionListener {
+public class Joueur extends JFrame implements ActionListener  {
 
     private JButton boutonLancement;
     private Plateau vie;
+    private PanelB cont;
+    private JComboBox text;
+    private String[] tab;
+    private String ac;
+    private JTextField textField;
+    private JTextField textField2;
+    private String probT;
+    private String probH;
 
-    public Joueur(Plateau vie){
+    public Joueur(Plateau plat){
         Image icone = Toolkit.getDefaultToolkit().getImage("img/skull.jpg");
         this.setIconImage(icone);
+        try{
+          this.cont = new PanelB("img/fond2.jpg");
+        }
+        catch(IOException e){
+          e.printStackTrace();
+        }
 
-        JPanel cont = new JPanel();
         this.add(cont);
 
-        this.vie = vie;
+        this.vie = plat;
         this.setTitle(" Entrez votre nom !");
         this.setSize(760,350);
     		this.setLocation(0,0);
@@ -37,7 +50,40 @@ public class Joueur extends JFrame implements ActionListener {
         boutonLancement.setSize(180,40);
         boutonLancement.setLocation(400,20);
         boutonLancement.addActionListener(this);
+
+        JLabel texteAff = new JLabel("Choisissez la densite de presence des dinosaures :");
+        texteAff.setFont(new Font("TimesRoman",Font.BOLD,30));
+        texteAff.setForeground(Color.white);
+        texteAff.setLocation(20,100);
+        texteAff.setSize(650,50);
+
+        JLabel texteAff2 = new JLabel("Proportion de vegetation");
+        texteAff2.setFont(new Font("TimesRoman",Font.BOLD,20));
+        texteAff2.setForeground(Color.white);
+        texteAff2.setLocation(120,230);
+        texteAff2.setSize(250,50);
+
+        JLabel texteAff3 = new JLabel("Proportion d'herbivores");
+        texteAff3.setFont(new Font("TimesRoman",Font.BOLD,20));
+        texteAff3.setForeground(Color.white);
+        texteAff3.setLocation(430,230);
+        texteAff3.setSize(250,50);
+
+        textField = new JTextField();
+        textField.setColumns(5);
+        textField.setLocation(200,200);
+        textField.setSize(50,35);
+        textField2 = new JTextField();
+        textField2.setColumns(5);
+        textField2.setLocation(500,200);
+        textField2.setSize(50,35);
+
         this.setVisible(true);
+        cont.add(texteAff);
+        cont.add(texteAff2);
+        cont.add(texteAff3);
+        cont.add(textField);
+        cont.add(textField2);
         cont.add(boutonLancement);
         cont.setSize(30,30);
         cont.setLocation(100,100);
@@ -64,30 +110,54 @@ public class Joueur extends JFrame implements ActionListener {
           System.out.println(e.toString());
         }
 
-        String[] tab = msg.split("/");
+        tab = msg.split("/");
 
-        JComboBox text = new JComboBox();
+        text = new JComboBox();
         for(int k=0;k<tab.length;k++){
           text.addItem(tab[k]);
         }
         text.setSize(300,40);
         text.setLocation(20,20);
+        text.setEditable(true);
         cont.add(text);
 
-        JTextArea text2 = new JTextArea("Entrez Votre Nom ici");
-        text2.setLocation(50,80);
-        text2.setSize(200,30);
-        cont.add(text2);
 
   }
 
+  /*public void itemStateChanged(ItemEvent x){
+    try{
 
+    }
+    catch(Exception e){
+      System.err.print(e.getMessage());
+    }
+  }*/
 
   public void actionPerformed (ActionEvent e){
     if (e.getSource() == boutonLancement){
+      this.ac = text.getSelectedItem().toString();
+      this.probT = textField.getText();
+      this.probH = textField2.getText();
+      for(int l=0;l<tab.length;l++){
+        if (!tab[l].equals(ac)){
+          try{
+           FileWriter fw = new FileWriter("joueur.txt",true);
+           fw.write(ac);
+           fw.close();
+          }
+          catch(IOException ioe){
+           System.err.println("IOException:" + ioe.getMessage());
+          }
+        }
+      }
+      System.out.println(Double.parseDouble(probH));
+      System.out.println(Double.parseDouble(probT));
+
+      vie.setProp(Double.parseDouble(probH));
+      vie.setDensiteHerb(Double.parseDouble(probT));
       AffichagePlateau p = new AffichagePlateau(vie);
       new RegleDinotopia(p);
       this.setVisible(false);
+    }
   }
-}
 }

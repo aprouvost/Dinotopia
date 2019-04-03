@@ -18,13 +18,13 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 	private JButton bout1;
 	private int compt;
 	private int l;
-	
+
 	//Attributs panEvent :
 	public JButton monteeEau;
 	public JButton meteorite;
 	public JButton secheresse;
 	public Plateau plat;
-	public Event evenement;
+	private PanStats statistiques;
 
 
 
@@ -37,16 +37,16 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		this.setLocation(0,0);		//Pour placer la fenêtre au centre de l'écran
 		this.setResizable(false); 		//Pour empêcher le redimensionnement de la fenêtre  /!\ � changer
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		/**
 		 * Panneau evenements
 		 */
 		JPanel events = new JPanel();
 		events.setBackground(new Color(0,0,0,0));
 		events.setBounds(900, 100, 400, 200);
-		
-		this.evenement = new Event(plat);
-		
+
+		//this.evenement = new Event(plat);
+
 		events.setLayout(new GridLayout(3,1,5,5));
 		monteeEau = new JButton("Montee Des Eaux");
 		meteorite = new JButton("Meteorite");
@@ -54,16 +54,16 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		monteeEau.addActionListener(this);
 		meteorite.addActionListener(this);
 		secheresse.addActionListener(this);
-		
+
 		events.add(monteeEau) ; events.add(meteorite) ; events.add(secheresse) ;
-		
+
 		/**
 		 * Panneau statistiques
 		 */
-		PanStats statistiques = new PanStats(monde);
+		statistiques = new PanStats(monde);
 		statistiques.setBackground(new Color(0,0,0,0));
 		statistiques.setBounds(900, 500, 400, 200);
-		
+
 		/**
 		 * Mon panneau Global
 		 */
@@ -91,29 +91,37 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 	public void actionPerformed (ActionEvent e){
 		if(e.getSource() == bout1){
 			monde.CachePlateau();
+			statistiques.Cache();
 			monde.parcoursTab();
-			monde.AffichePlateau();
 			monde.compteurPlus();
+			statistiques.Visible();
+			monde.AffichePlateau();
 		}
-		
+
 		//BOUTONS EVENEMENTS :
 		if(e.getSource()==monteeEau) {  //Montee des eaux
 			monde.CachePlateau();
-			evenement.monteeDesEaux();
-			monde.AffichePlateau();
+			statistiques.Cache();
+			monde.monteeDesEaux();
 			monde.compteurPlus();
+			statistiques.Visible();
+			monde.AffichePlateau();
 		}
 		else if(e.getSource() == meteorite) {	//Meteorite
 			monde.CachePlateau();
-			evenement.meteorite();
-			monde.AffichePlateau();
+			statistiques.Cache();
+			monde.meteorite();
 			monde.compteurPlus();
+			statistiques.Visible();
+			monde.AffichePlateau();
 		}
 		else {	//Secheresse
 			monde.CachePlateau();
-			evenement.secheresse();
-			monde.AffichePlateau();
+			statistiques.Cache();
+			monde.secheresse();
 			monde.compteurPlus();
+			statistiques.Visible();
+			monde.AffichePlateau();
 		}
 	}
 }
