@@ -16,6 +16,7 @@ public class Plateau extends JPanel {
     public double densiteCarn;
     public Dinosaure [][] mondeDino;
     public int compteurTour;
+    public boolean mondeStable=false;
 
     public Plateau ( int h, int l , double prop, double densiteHerb){
       this.h=h;
@@ -55,12 +56,9 @@ public class Plateau extends JPanel {
                 }
               }
             }
-          }
-      //    System.out.println("densité herbivores" +nombreHerbivores/(prop*h*l) +" voulu à"+ densiteHerb);
-      //    System.out.println(" densité carnivores"+ nombreCarnivores/(h*l)+" voulu à"+ 1-densiteHerb);
-      //    System.out.println(" prop de"+ (nombreCarnivores+nombreHerbivores)/(h*l)+ "voulu à"+ prop);
-          return monde;
-        }
+         }
+           return monde;
+         }
 
     // Permet de dessiner sur le plateau les dinos
     public void paintComponent(Graphics g){
@@ -158,12 +156,10 @@ public class Plateau extends JPanel {
         */
 
         public void interactionHerbi(int i, int j){
-        //  if(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)>0){
             mondeDino[i][j].retirerVieDinosaure( ((mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)))+((mondeDino[i][j].chanceHerb)*(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j))));
             if (mondeDino[i][j].dinoIsDead()==true){
               mondeDino[i][j]=null;
             }
-        //  }
         }
 
 
@@ -179,17 +175,8 @@ public class Plateau extends JPanel {
           int voiHerb=mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j);
           if(voiHerb>1 ){
              int [][] positionLibre=trouverCaseLibre(i,j);
-             //if ( positionLibre[0][0]!=0 && positionLibre[0][1]!=0){
-
-               int parcours= (int)((8-voisins)*Math.random());
-               mondeDino[positionLibre[parcours][0]][positionLibre[parcours][1]]= new Herbivore (0.3);
-               /*System.out.print( "parent en ");
-               System.out.print(i+",");
-               System.out.println(j);
-               System.out.print( "bebe Herb en "+positionLibre[parcours][0]+"," );
-               System.out.println(positionLibre[parcours][1]);
-               System.out.println();*/
-
+              int parcours= (int)((8-voisins)*Math.random());
+              mondeDino[positionLibre[parcours][0]][positionLibre[parcours][1]]= new Herbivore (0.3);
            }
         }
 
@@ -200,12 +187,10 @@ public class Plateau extends JPanel {
         * @return rien, modifie directement le tableau
         */
         public void interactionCarni( int i, int j){
-        //  if(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j)>0){
              mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceHerb)*(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j))+(mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
              if (mondeDino[i][j].dinoIsDead()==true){
              mondeDino[i][j]=null;
              }
-        //   }
         }
 
 
@@ -223,15 +208,8 @@ public class Plateau extends JPanel {
 
           if(voiCarni>1 ){
             int [][] positionLibreBis=trouverCaseLibre(i,j);
-         // if ( positionLibreBis[0][0]>0 && positionLibreBis[0][1]>0){
             int parcours= (int)((8-voisins)*Math.random());
             mondeDino[positionLibreBis[parcours][0]][positionLibreBis[parcours][1]]= new Carnivore (0.3);
-            /*System.out.print( "parent en ");
-            System.out.print(i+",");
-            System.out.println(j);
-            System.out.print( "bebe Carn en "+positionLibreBis[parcours][0]+"," );
-            System.out.println(positionLibreBis[parcours][1]);
-            System.out.println();*/
           }
         }
 
@@ -288,8 +266,7 @@ public class Plateau extends JPanel {
     return compteurTour;
   }
 
-/*  public boolean leMondeEstStable() {
-	  boolean a = false;
+  public void leMondeEstStable() {
 	  if(mondeVivant()==true) {
 		  double vivants = 0;
 		  for (int i=0; i<l; i++){
@@ -308,12 +285,63 @@ public class Plateau extends JPanel {
 
 
 	  if(prop==propavant && prop==propavantavant) {
-		  a = true;
+		  mondeStable = true;
       System.out.println("Stable");
 	  }
-	  return a;
 
-  }*/
+
+  }
+
+  public void monteeDesEaux(){
+    for (int i=0; i<l; i++){
+      for (int j=0; j<h; j++){
+        if ( mondeDino[i][j]!= null){
+        if ( mondeDino[i][j].type == "Herbivore"){
+          mondeDino[i][j].retirerVieDinosaure(20);
+        }
+        else {
+          mondeDino[i][j].retirerVieDinosaure(50);
+          }
+        }
+      }
+    }
+  }
+
+
+  public void meteorite(){
+    for (int i=0; i<l; i++){
+      for (int j=0; j<h; j++){
+        if ( mondeDino[i][j]!= null){
+        mondeDino[i][j].retirerVieDinosaure(50);
+        }
+      }
+    }
+  }
+
+
+  public void secheresse(){
+    for (int i=0; i<l; i++){
+      for (int j=0; j<h; j++){
+        if ( mondeDino[i][j]!= null){
+        if ( mondeDino[i][j].type == "Herbivore"){
+          mondeDino[i][j].retirerVieDinosaure(50);
+        }
+        else {
+          mondeDino[i][j].retirerVieDinosaure(20);
+          }
+        }
+      }
+    }
+  }
+
+  public void setProp( double prop){
+    this.prop=prop;
+  }
+
+  public void setDensiteHerb( double densHerb){
+    this.densiteHerb=densHerb;
+  }
+
 
 
 
