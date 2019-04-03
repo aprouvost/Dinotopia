@@ -51,7 +51,7 @@ public class PanStats extends JPanel implements ActionListener {
 	 * @param monde
 	 */
 	public void miseAJourStats() {
-		this.compteurTour.setText("Tour numero "+plateau.getCompteur());
+		this.compteurTour.setText("Tour numero "+plat.getCompteur());
 		this.propCarni.setText("<html>Proportion de carnivores :<br>"+plat.getDensiteCarn()*100+"%</html>");
 		this.propHerbi.setText("<html>Proportion d'herbivores :<br>"+plat.getDensiteHerb()*100+"%</html>");
 		this.prctgDino.setText("<html>Pourcentage de dinosaures :<br>"+plat.getProp()*100+"%</html>");
