@@ -18,18 +18,21 @@ public class Plateau extends JPanel {
     public int compteurTour;
     public boolean mondeStable=false;
 
-    public Plateau ( int h, int l , double prop, double densiteHerb){
+    public Plateau ( int h, int l){
       this.h=h;
       this.l=l;
-      this.prop= prop;
+      this.prop= 0;
       this.propavant = prop;
      this.propavantavant = prop;
-      this.densiteHerb= densiteHerb;
+      this.densiteHerb = 0;
       this.densiteCarn=1- densiteHerb;
-      mondeDino= genererMondeAleatoire(h,l, prop, densiteHerb);
+      //mondeDino= genererMondeAleatoire(h,l, prop, densiteHerb);
     }
 
-
+    public void nouvelleGeneration()
+    {
+      this.mondeDino = genererMondeAleatoire(h,l,prop,densiteHerb);
+    }
     /** Genere un monde aleatoire, ordonné dans un tableau.
     Chaque case du tableau contient un dinosaure
     * @param h Hauteur du monde
@@ -38,7 +41,7 @@ public class Plateau extends JPanel {
     * @return monde nouvellement cree, tableau 2D de Dinosaures
     */
 
-    public static Dinosaure [][] genererMondeAleatoire(int h, int l, double prop, double densiteHerb){
+    private Dinosaure [][] genererMondeAleatoire(int h, int l, double prop, double densiteHerb){
         	Dinosaure[][] monde= new Dinosaure[h][l];
           double nombreHerbivores=0;
           double nombreCarnivores=0;
@@ -59,6 +62,7 @@ public class Plateau extends JPanel {
          }
            return monde;
          }
+
 
     // Permet de dessiner sur le plateau les dinos
     public void paintComponent(Graphics g){
@@ -95,7 +99,7 @@ public class Plateau extends JPanel {
   		this.setVisible(false);
   	}
 
-// Permet effacer le terminal
+    // Permet effacer le terminal
     public static void effaceEcran() {
         String ESC = "\033[";
         System.out.print(ESC+"2J");
@@ -152,14 +156,14 @@ public class Plateau extends JPanel {
         /** Parcours du tableau et intéraction entre les différents Herbivores
         * @param i l'abscisse du dino
         * @param j l'ordonnée du dino
-        * @return rien, modifie directement le tableau
+        * @return un boolean, si le dinosaure a survecu
         */
 
-        public void interactionHerbi(int i, int j){
-            mondeDino[i][j].retirerVieDinosaure( ((mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)))+((mondeDino[i][j].chanceHerb)*(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j))));
-            if (mondeDino[i][j].dinoIsDead()==true){
-              mondeDino[i][j]=null;
-            }
+        public boolean interactionHerbi(int i, int j){
+            mondeDino[i][j].retirerVieDinosaure( ((mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)))+
+                                                  ((mondeDino[i][j].chanceHerb)*(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j))));
+
+            return !mondeDino[i][j].dinoIsDead();
         }
 
 
@@ -184,13 +188,12 @@ public class Plateau extends JPanel {
         /** Parcours du tableau et intéraction entre les différents Carnivores
         * @param i l'abscisse du dino
         * @param j l'ordonnée du dino
-        * @return rien, modifie directement le tableau
+        * @return un boolean, si le dinosaure a survecu
         */
-        public void interactionCarni( int i, int j){
-             mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceHerb)*(mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j))+(mondeDino[i][j].chanceCarni)*(mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
-             if (mondeDino[i][j].dinoIsDead()==true){
-             mondeDino[i][j]=null;
-             }
+        public boolean interactionCarni( int i, int j){
+            mondeDino[i][j].retirerVieDinosaure( (mondeDino[i][j].chanceHerb * mondeDino[i][j].nbrVoisinHerbi( mondeDino, i, j) )+
+                                                  (mondeDino[i][j].chanceCarni * mondeDino[i][j].nbrVoisinCarni( mondeDino, i, j)));
+            return !mondeDino[i][j].dinoIsDead();
         }
 
 
@@ -219,21 +222,39 @@ public class Plateau extends JPanel {
         */
 
   public void parcoursTab(){
-
+    Dinosaure [][] nouveauMonde = new Dinosaure[mondeDino.length][mondeDino[0].length];
+    // faire toutes les interactions qui peuvent tuer des dinos
     for(int i=0; i<h; i++){
-        for(int j=0; j<l;j++){
-          if(mondeDino[i][j]!= null && mondeDino[i][j].type== "Herbivore"){
-            interactionHerbi(i,j);
-            bebeHerbi(i,j);
+      for(int j=0; j<l;j++){
+        if(mondeDino[i][j]!=null){
+          if(mondeDino[i][j].type == "Herbivore"){
+            if(interactionHerbi(i,j)){ // si il a survecu
+              nouveauMonde[i][j] = mondeDino[i][j];
             }
-
-          if(mondeDino[i][j]!= null && mondeDino[i][j].type== "Carnivore"){
-             interactionCarni(i,j);
-             bebeCarni(i,j);
+          }
+          else if (mondeDino[i][j].type == "Carnivore"){
+            if(interactionCarni(i,j)){ // si il a survecu
+              nouveauMonde[i][j] = mondeDino[i][j];
+            }
           }
         }
       }
     }
+    mondeDino = nouveauMonde; // prendre le nouveau monde avec les intéractions appliquées comme référence
+    // creation des nouveaux dinos
+    for(int i=0; i<h; i++){
+      for(int j=0; j<l;j++){
+        if(mondeDino[i][j]!=null){
+          if(mondeDino[i][j].type == "Herbivore"){
+            bebeHerbi(i,j);
+          }
+          else if (mondeDino[i][j].type == "Carnivore"){
+            bebeCarni(i,j);
+          }
+        }
+      }
+    }
+  }
 
     public int getH() {
 	  return h;
@@ -293,6 +314,7 @@ public class Plateau extends JPanel {
   }
 
   public void monteeDesEaux(){
+
     for (int i=0; i<l; i++){
       for (int j=0; j<h; j++){
         if ( mondeDino[i][j]!= null){

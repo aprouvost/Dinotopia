@@ -2,7 +2,7 @@ public class Dinosaure {
 
     public String type ; // On indique si c'est un herbivore ou carnivore ( à définir dans les classes filles)
     public int age; // temps depuis lequel il est vivant ( en ms)
-    public double pointsVie=50; // J'initialise à 100, à modifier plus tard
+    public double pointsVie=50; // J'initialise à 50, à modifier plus tard
     public double chanceHerb;
     public double chanceCarni;
 

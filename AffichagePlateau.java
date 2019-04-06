@@ -79,7 +79,6 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		compt = 0;
 		l = 3;
 	}
-
 	public void AffichePlateau(){
 		this.setVisible(true);
 	}
@@ -99,7 +98,7 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		}
 
 		//BOUTONS EVENEMENTS :
-		if(e.getSource()==monteeEau) {  //Montee des eaux
+		else if(e.getSource()==monteeEau) {  //Montee des eaux
 			monde.CachePlateau();
 			statistiques.Cache();
 			monde.monteeDesEaux();
@@ -115,7 +114,7 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 			statistiques.Visible();
 			monde.AffichePlateau();
 		}
-		else {	//Secheresse
+		else if(e.getSource() == secheresse){	//Secheresse
 			monde.CachePlateau();
 			statistiques.Cache();
 			monde.secheresse();

@@ -57,13 +57,13 @@ public class Joueur extends JFrame implements ActionListener  {
         texteAff.setLocation(20,100);
         texteAff.setSize(650,50);
 
-        JLabel texteAff2 = new JLabel("Proportion de vegetation");
+        JLabel texteAff2 = new JLabel("Proportion de dinosaures");
         texteAff2.setFont(new Font("TimesRoman",Font.BOLD,20));
         texteAff2.setForeground(Color.white);
         texteAff2.setLocation(120,230);
         texteAff2.setSize(250,50);
 
-        JLabel texteAff3 = new JLabel("Proportion d'herbivores");
+        JLabel texteAff3 = new JLabel("Proportion d'herbivores parmis eux");
         texteAff3.setFont(new Font("TimesRoman",Font.BOLD,20));
         texteAff3.setForeground(Color.white);
         texteAff3.setLocation(430,230);
@@ -135,26 +135,32 @@ public class Joueur extends JFrame implements ActionListener  {
 
   public void actionPerformed (ActionEvent e){
     if (e.getSource() == boutonLancement){
+      System.out.println("un passage");
       this.ac = text.getSelectedItem().toString();
       this.probT = textField.getText();
       this.probH = textField2.getText();
+      boolean toWrite = true;
       for(int l=0;l<tab.length;l++){
-        if (!tab[l].equals(ac)){
-          try{
-           FileWriter fw = new FileWriter("joueur.txt",true);
-           fw.write(ac);
-           fw.close();
-          }
-          catch(IOException ioe){
-           System.err.println("IOException:" + ioe.getMessage());
-          }
+        if (tab[l].equals(ac)){
+          toWrite = false;
+        }
+      }
+      if(toWrite){
+        try{
+         FileWriter fw = new FileWriter("joueur.txt",true);
+         fw.write(ac+"\n");
+         fw.close();
+        }
+        catch(IOException ioe){
+         System.err.println("IOException:" + ioe.getMessage());
         }
       }
       System.out.println(Double.parseDouble(probH));
       System.out.println(Double.parseDouble(probT));
 
-      vie.setProp(Double.parseDouble(probH));
-      vie.setDensiteHerb(Double.parseDouble(probT));
+      vie.setProp(Double.parseDouble(probT));
+      vie.setDensiteHerb(Double.parseDouble(probH));
+      vie.nouvelleGeneration();
       AffichagePlateau p = new AffichagePlateau(vie);
       new RegleDinotopia(p);
       this.setVisible(false);

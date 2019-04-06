@@ -8,13 +8,13 @@ public class Main{
       /*double P = 0.01; // probabilité de vie d'une cellule
       double pp= 0.5;
       double ppp= 1-pp;*/
-      Plateau  vie= new Plateau ( H,L,0.5,0.6);
+      Plateau  vie= new Plateau ( H,L);
 
       new AffichageFenetreDemarrage(vie);
       Dinosaure[][] monde=vie.mondeDino;
 
 
-      System.out.print("+");
+      /*System.out.print("+");
       for(int j=0; j<L;j++)
           System.out.print("-");
       System.out.println("+");
@@ -40,6 +40,6 @@ public class Main{
         for(int j=0; j<L;j++)
             System.out.print("-");
         System.out.println("+");
-
+*/
         }
     }
