@@ -14,7 +14,8 @@ public class Main{
       Dinosaure[][] monde=vie.mondeDino;
 
 
-      /*System.out.print("+");
+      /*
+      System.out.print("+");
       for(int j=0; j<L;j++)
           System.out.print("-");
       System.out.println("+");

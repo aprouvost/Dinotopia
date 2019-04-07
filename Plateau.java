@@ -21,12 +21,37 @@ public class Plateau extends JPanel {
     public Plateau ( int h, int l){
       this.h=h;
       this.l=l;
-      this.prop= 0;
+      this.prop= 0.;
       this.propavant = prop;
-     this.propavantavant = prop;
-      this.densiteHerb = 0;
-      this.densiteCarn=1- densiteHerb;
+      this.propavantavant = prop;
+      this.densiteHerb = 0.;
+      this.densiteCarn=1. - densiteHerb;
+      compteurTour = 0;
       //mondeDino= genererMondeAleatoire(h,l, prop, densiteHerb);
+    }
+
+    public void calcDens(){
+      int comptH =0;
+      int comptP =0;
+      int comptC =0;
+      for(int i=0;i<mondeDino.length;i++){
+        for(int j=0;j<mondeDino[i].length;j++){
+          if(mondeDino[i][j]!=null){
+            if(mondeDino[i][j].type == "Herbivore"){
+              comptH++;
+            }
+            else if (mondeDino[i][j].type == "Carnivore"){
+              comptC++;
+            }
+          }
+          else{
+            comptP++;
+          }
+        }
+      }
+      this.prop = 1-(double)(comptP)/(double)(l*h);
+      this.densiteCarn = (double)(comptC)/(double)(comptC+comptH);
+      this.densiteHerb = (double)(comptH)/(double)(comptC+comptH);
     }
 
     public void nouvelleGeneration()
@@ -284,7 +309,7 @@ public class Plateau extends JPanel {
   }
 
   public int getCompteur(){
-    return compteurTour;
+    return this.compteurTour;
   }
 
   public void leMondeEstStable() {
@@ -319,10 +344,10 @@ public class Plateau extends JPanel {
       for (int j=0; j<h; j++){
         if ( mondeDino[i][j]!= null){
         if ( mondeDino[i][j].type == "Herbivore"){
-          mondeDino[i][j].retirerVieDinosaure(20);
+          mondeDino[i][j].retirerVieDinosaure(10);
         }
         else {
-          mondeDino[i][j].retirerVieDinosaure(50);
+          mondeDino[i][j].retirerVieDinosaure(15);
           }
         }
       }
@@ -334,7 +359,7 @@ public class Plateau extends JPanel {
     for (int i=0; i<l; i++){
       for (int j=0; j<h; j++){
         if ( mondeDino[i][j]!= null){
-        mondeDino[i][j].retirerVieDinosaure(50);
+        mondeDino[i][j].retirerVieDinosaure(30);
         }
       }
     }
@@ -346,7 +371,7 @@ public class Plateau extends JPanel {
       for (int j=0; j<h; j++){
         if ( mondeDino[i][j]!= null){
         if ( mondeDino[i][j].type == "Herbivore"){
-          mondeDino[i][j].retirerVieDinosaure(50);
+          mondeDino[i][j].retirerVieDinosaure(30);
         }
         else {
           mondeDino[i][j].retirerVieDinosaure(20);
@@ -362,6 +387,7 @@ public class Plateau extends JPanel {
 
   public void setDensiteHerb( double densHerb){
     this.densiteHerb=densHerb;
+    this.densiteCarn=1-densHerb;
   }
 
 

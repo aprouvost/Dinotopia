@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class PanStats extends JPanel implements ActionListener {
+public class PanStats extends JPanel {
 
 	private JLabel compteurTour;
 	private JLabel propCarni;
@@ -23,19 +23,19 @@ public class PanStats extends JPanel implements ActionListener {
 		this.plat = plateau;
 
 		//JLabels
-		this.compteurTour = new JLabel("Tour numero "+plateau.getCompteur());
+		this.compteurTour = new JLabel("Tour numero "+plat.getCompteur());
 		this.compteurTour.setFont(policeStats);
 
-		this.propCarni = new JLabel("<html>Proportion de carnivores :<br>"+plateau.getDensiteCarn()*100+"%</html>");
+		this.propCarni = new JLabel("<html>Proportion de carnivores :<br>"+plat.getDensiteCarn()*100+"%</html>");
 		this.propCarni.setFont(policeStats);
 
-		this.propHerbi = new JLabel("<html>Proportion d'herbivores :<br>"+plateau.getDensiteHerb()*100+"%</html>");
+		this.propHerbi = new JLabel("<html>Proportion d'herbivores :<br>"+plat.getDensiteHerb()*100+"%</html>");
 		this.propHerbi.setFont(policeStats);
 
-		this.prctgDino = new JLabel("<html>Pourcentage de dinosaures :<br>"+plateau.getProp()*100+"%</html>");
+		this.prctgDino = new JLabel("<html>Pourcentage de dinosaures :<br>"+plat.getProp()*100+"%</html>");
 		this.prctgDino.setFont(policeStats);
 
-		this.prctgVegetaux = new JLabel("<html>Pourcentage de vegetaux :<br>"+(1.0-plateau.getProp())*100+"%</html>");
+		this.prctgVegetaux = new JLabel("<html>Pourcentage de vegetaux :<br>"+(1.0-plat.getProp())*100+"%</html>");
 		this.prctgVegetaux.setFont(policeStats);
 
 
@@ -51,14 +51,16 @@ public class PanStats extends JPanel implements ActionListener {
 	 * @param monde
 	 */
 	public void miseAJourStats() {
+		plat.calcDens();
 		this.compteurTour.setText("Tour numero "+plat.getCompteur());
+		System.out.println(plat.getDensiteCarn()*100);
 		this.propCarni.setText("<html>Proportion de carnivores :<br>"+plat.getDensiteCarn()*100+"%</html>");
 		this.propHerbi.setText("<html>Proportion d'herbivores :<br>"+plat.getDensiteHerb()*100+"%</html>");
 		this.prctgDino.setText("<html>Pourcentage de dinosaures :<br>"+plat.getProp()*100+"%</html>");
 		this.prctgVegetaux.setText("<html>Pourcentage de vegetaux :<br>"+(1.0-plat.getProp())*100+"%</html>");
 	}
 
-
+/*
 	//SETTERS
 
 	public void setCompteur(String mess) {
@@ -94,8 +96,10 @@ public class PanStats extends JPanel implements ActionListener {
 	}
 	public void setPrctgVege(double numb) {
 
-	}
+	}*/
+
 	public void Visible(){
+			miseAJourStats();
 			this.setVisible(true);
 	}
 	public void Cache() {
@@ -103,7 +107,6 @@ public class PanStats extends JPanel implements ActionListener {
 	}
 
 
-	public void actionPerformed(ActionEvent arg0) {
-	}
+	//public void actionPerformed(ActionEvent arg0) {}
 
 }

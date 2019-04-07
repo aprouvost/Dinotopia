@@ -23,7 +23,6 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 	public JButton monteeEau;
 	public JButton meteorite;
 	public JButton secheresse;
-	public Plateau plat;
 	private PanStats statistiques;
 
 
@@ -102,6 +101,7 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 			monde.CachePlateau();
 			statistiques.Cache();
 			monde.monteeDesEaux();
+			monde.parcoursTab();
 			monde.compteurPlus();
 			statistiques.Visible();
 			monde.AffichePlateau();
@@ -110,6 +110,7 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 			monde.CachePlateau();
 			statistiques.Cache();
 			monde.meteorite();
+			monde.parcoursTab();
 			monde.compteurPlus();
 			statistiques.Visible();
 			monde.AffichePlateau();
@@ -118,6 +119,7 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 			monde.CachePlateau();
 			statistiques.Cache();
 			monde.secheresse();
+			monde.parcoursTab();
 			monde.compteurPlus();
 			statistiques.Visible();
 			monde.AffichePlateau();

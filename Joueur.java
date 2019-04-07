@@ -25,6 +25,7 @@ public class Joueur extends JFrame implements ActionListener  {
     private JTextField textField2;
     private String probT;
     private String probH;
+    private JOptionPane jop;
 
     public Joueur(Plateau plat){
         Image icone = Toolkit.getDefaultToolkit().getImage("img/skull.jpg");
@@ -135,35 +136,37 @@ public class Joueur extends JFrame implements ActionListener  {
 
   public void actionPerformed (ActionEvent e){
     if (e.getSource() == boutonLancement){
-      System.out.println("un passage");
       this.ac = text.getSelectedItem().toString();
       this.probT = textField.getText();
       this.probH = textField2.getText();
-      boolean toWrite = true;
-      for(int l=0;l<tab.length;l++){
-        if (tab[l].equals(ac)){
-          toWrite = false;
+      try{
+        boolean toWrite = true;
+        for(int l=0;l<tab.length;l++){
+          if (tab[l].equals(ac)){
+            toWrite = false;
+          }
         }
-      }
-      if(toWrite){
-        try{
-         FileWriter fw = new FileWriter("joueur.txt",true);
-         fw.write(ac+"\n");
-         fw.close();
+        if(toWrite){
+          FileWriter fw = new FileWriter("joueur.txt",true);
+          fw.write(ac+"\n");
+          fw.close();
         }
-        catch(IOException ioe){
-         System.err.println("IOException:" + ioe.getMessage());
+        if(Double.parseDouble(probT)>=1 || Double.parseDouble(probH)>=1  ){
+          throw(new Exception());
         }
-      }
-      System.out.println(Double.parseDouble(probH));
-      System.out.println(Double.parseDouble(probT));
+        else{
+          vie.setProp(Double.parseDouble(probT));
+          vie.setDensiteHerb(Double.parseDouble(probH));
+          vie.nouvelleGeneration();
+          AffichagePlateau p = new AffichagePlateau(vie);
+          new RegleDinotopia(p);
+          this.setVisible(false);
+        }
 
-      vie.setProp(Double.parseDouble(probT));
-      vie.setDensiteHerb(Double.parseDouble(probH));
-      vie.nouvelleGeneration();
-      AffichagePlateau p = new AffichagePlateau(vie);
-      new RegleDinotopia(p);
-      this.setVisible(false);
+			}catch(Exception ie){
+				jop.showMessageDialog(null,"Vous avez mal rentre les valeurs de densites","Erreur",JOptionPane.ERROR_MESSAGE);
+        //System.err.println("IOException:" + ie.getMessage());
+			}
     }
   }
 }
