@@ -384,7 +384,7 @@ public class Plateau extends JPanel {
     boolean estStable=true;
     for (int i=0; i<l; i++){
       for (int j=0; j<h; j++){
-        if (mondeDino[i][j].nbrVoisin(mondeDino,h,l )!=0){
+        if ( mondeDino[i][j].outOfBounds(mondeDino,i,j) == false &&  mondeDino[i][j] != null && mondeDino[i][j].nbrVoisin(mondeDino,h,l )>0){
             estStable = false;
         }
       }
@@ -396,7 +396,7 @@ public class Plateau extends JPanel {
     boolean estVivant= false;
     for (int i=0; i<l; i++){
       for (int j=0; j<h; j++){
-        if (mondeDino[i][j] != null){
+        if ( mondeDino[i][j].outOfBounds(mondeDino,i,j) == false && mondeDino[i][j] != null){
             estVivant = true;
         }
       }
@@ -405,7 +405,7 @@ public class Plateau extends JPanel {
   }
 
   public boolean finPartie(){
-    if ( mondeVivant()==false || mondeStable()==true){
+    if ( (mondeVivant()==false || mondeStable()==true)){
       return true;
     }else{
       return false;
