@@ -132,17 +132,7 @@ public class Plateau extends JPanel {
         System.out.flush();
     }
 
-    public boolean mondeVivant(){
-      boolean estVivant= false;
-      for (int i=0; i<l; i++){
-        for (int j=0; j<h; j++){
-          if (mondeDino[i][j] != null){
-              estVivant = true;
-          }
-        }
-      }
-      return estVivant;
-    }
+
 
 
     /** Permet de trouver la premiere case libre autour de lui
@@ -388,6 +378,38 @@ public class Plateau extends JPanel {
   public void setDensiteHerb( double densHerb){
     this.densiteHerb=densHerb;
     this.densiteCarn=1-densHerb;
+  }
+
+  public boolean mondeStable(){
+    boolean estStable=true;
+    for (int i=0; i<l; i++){
+      for (int j=0; j<h; j++){
+        if (mondeDino[i][j].nbrVoisin(mondeDino,h,l )!=0){
+            estStable = false;
+        }
+      }
+    }
+    return estStable;
+  }
+
+  public boolean mondeVivant(){
+    boolean estVivant= false;
+    for (int i=0; i<l; i++){
+      for (int j=0; j<h; j++){
+        if (mondeDino[i][j] != null){
+            estVivant = true;
+        }
+      }
+    }
+    return estVivant;
+  }
+
+  public boolean finPartie(){
+    if ( mondeVivant()==false || mondeStable()==true){
+      return true;
+    }else{
+      return false;
+    }
   }
 
 

@@ -63,6 +63,19 @@ public class Dinosaure {
             }
 
 
+        public static int nbrVoisin(Dinosaure[][] m,int h, int l){
+          int ret = 0;
+          for(int i =h-1; i <= h+1; i++){
+              for(int k = l-1; k<= l+1; k++){
+                  if(outOfBounds(m,i,k) == false && (i == h && k == l) ==false){
+                      if(m[i][k] != null)
+                          ret ++;
+                        }
+                    }
+                  }
+            return ret; // retourne le nombre de voisins carnivores ( dans les cases voisines ) du dinosaure
+          }
+
 
         /** Calcule à partir de la case indiquée si la case se situe sur le bord du plateau de jeu.
       	* @param monde tableau du monde ( rempli de dinosaures)
