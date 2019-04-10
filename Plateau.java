@@ -10,10 +10,17 @@ public class Plateau extends JPanel {
     public int h ; // nombre de lignes du tableau ( hauteur)
     public int l; //nombre de colonnes du tableau ( largeur)
     public double densiteHerb;
+    public double densiteCarn;
     public double prop;
+        /* Densité Initiale pour les statistiques */
+    public double propInit;
+    public double densiteCarnInit;
+    public double densiteHerbInit;
+
     public double propavant;
     public double propavantavant;
-    public double densiteCarn;
+
+
     public Dinosaure [][] mondeDino;
     public int compteurTour;
     public boolean mondeStable=false;
@@ -373,19 +380,24 @@ public class Plateau extends JPanel {
 
   public void setProp( double prop){
     this.prop=prop;
+    this.propInit=prop;
   }
 
   public void setDensiteHerb( double densHerb){
     this.densiteHerb=densHerb;
     this.densiteCarn=1-densHerb;
+    this.densiteCarnInit=1-densiteHerb;
+    this.densiteHerbInit=densHerb;
   }
 
   public boolean mondeStable(){
     boolean estStable=true;
     for (int i=0; i<l; i++){
       for (int j=0; j<h; j++){
-        if ( mondeDino[i][j].outOfBounds(mondeDino,i,j) == false &&  mondeDino[i][j] != null && mondeDino[i][j].nbrVoisin(mondeDino,h,l )>0){
+        if ( mondeDino[i][j].outOfBounds(mondeDino,i,j) == false ){
+          if(mondeDino[i][j] != null && mondeDino[i][j].nbrVoisin(mondeDino,h,l )>0){
             estStable = false;
+          }
         }
       }
     }
@@ -405,7 +417,11 @@ public class Plateau extends JPanel {
   }
 
   public boolean finPartie(){
-    if ( (mondeVivant()==false || mondeStable()==true)){
+    if  (mondeVivant()==false ){
+      System.out.println("mort");
+      return true;
+    }else if ( mondeStable()==true){
+      System.out.println("stable");
       return true;
     }else{
       return false;

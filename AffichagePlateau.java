@@ -89,45 +89,32 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 	 * Lorqu'une action est réalisé
 	 */
 	public void actionPerformed (ActionEvent e){
+		monde.CachePlateau();
+		statistiques.Cache();
 		if(e.getSource() == bout1){
-			monde.CachePlateau();
-			statistiques.Cache();
 			monde.parcoursTab();
 			monde.compteurPlus();
-			statistiques.Visible();
-			monde.AffichePlateau();
-
 		}
 
 		//BOUTONS EVENEMENTS :
 		else if(e.getSource()==monteeEau) {  //Montee des eaux
-			monde.CachePlateau();
-			statistiques.Cache();
 			monde.monteeDesEaux();
 			monde.parcoursTab();
 			monde.compteurPlus();
-			statistiques.Visible();
-			monde.AffichePlateau();
 		}
 		else if(e.getSource() == meteorite) {	//Meteorite
-			monde.CachePlateau();
-			statistiques.Cache();
 			monde.meteorite();
 			monde.parcoursTab();
 			monde.compteurPlus();
-			statistiques.Visible();
-			monde.AffichePlateau();
 		}
 		else if(e.getSource() == secheresse){	//Secheresse
-			monde.CachePlateau();
-			statistiques.Cache();
 			monde.secheresse();
 			monde.parcoursTab();
 			monde.compteurPlus();
-			statistiques.Visible();
-			monde.AffichePlateau();
 		}
 		FinPartie();
+		statistiques.Visible();
+		monde.AffichePlateau();
 	}
 
 	public void FinPartie(){
@@ -138,6 +125,7 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 			events.remove(secheresse);
 			this.remove(bout1);
 			jop.showMessageDialog(null,"Le jeu est terminé, \n Bravo","Fin du Jeu",JOptionPane.INFORMATION_MESSAGE);
+			new AffichageFin(monde);
 		}
 	}
 
