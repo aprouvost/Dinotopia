@@ -24,6 +24,8 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 	public JButton meteorite;
 	public JButton secheresse;
 	private PanStats statistiques;
+	private JOptionPane jop;
+	private JPanel events;
 
 
 
@@ -40,7 +42,7 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 		/**
 		 * Panneau evenements
 		 */
-		JPanel events = new JPanel();
+		events = new JPanel();
 		events.setBackground(new Color(0,0,0,0));
 		events.setBounds(900, 100, 400, 200);
 
@@ -94,6 +96,7 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 			monde.compteurPlus();
 			statistiques.Visible();
 			monde.AffichePlateau();
+
 		}
 
 		//BOUTONS EVENEMENTS :
@@ -124,5 +127,20 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 			statistiques.Visible();
 			monde.AffichePlateau();
 		}
+		FinPartie();
 	}
+
+	public void FinPartie(){
+		System.out.println(monde.finPartie());
+		if (monde.finPartie()){
+			events.remove(monteeEau);
+			events.remove(meteorite);
+			events.remove(secheresse);
+			this.remove(bout1);
+			jop.showMessageDialog(null,"Le jeu est terminé, \n Bravo","Fin du Jeu",JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+
+
+
 }
