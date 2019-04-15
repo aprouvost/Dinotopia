@@ -19,7 +19,6 @@ public class RegleDinotopia extends JFrame implements ActionListener {
     private AffichagePlateau p;
 
     public RegleDinotopia(AffichagePlateau p){
-      JLabel texteRegles = new JLabel("");
       JLabel texteRegles2 = new JLabel("");
       String ligne ="";
       String msg ="<html>";
@@ -34,13 +33,7 @@ public class RegleDinotopia extends JFrame implements ActionListener {
              System.out.println("Erreur d'ouverture");
           }
         while ((ligne = lecteurAvecBuffer.readLine()) != null)
-          if(i == 0){
-            texteRegles.setText(ligne);
-            i++;
-          }
-          else if(i != 0){
-            msg += ligne + "<br>";
-          }
+          msg += ligne + "<br>";
           lecteurAvecBuffer.close();
           msg += "</html>";
         }
@@ -48,7 +41,9 @@ public class RegleDinotopia extends JFrame implements ActionListener {
         System.out.println(e.toString());
       }
 
-
+      texteRegles2.setText(msg);
+      texteRegles2.updateUI();
+      System.out.println(msg);
       Image icone = Toolkit.getDefaultToolkit().getImage("img/skull.jpg");
       this.setIconImage(icone);
       this.p = p;
@@ -75,20 +70,14 @@ public class RegleDinotopia extends JFrame implements ActionListener {
       boutonLancement.setLocation(300,400);
       boutonLancement.setBackground(Color.white);
       boutonLancement.addActionListener(this);
+
       texteRegles2.setSize(1200,400);
       texteRegles2.setLocation(100,0);
-      texteRegles2.setText(msg);
       texteRegles2.setFont(new Font("TimesRoman",Font.BOLD,15));
       texteRegles2.setForeground(Color.white);
       texteRegles2.setBackground(Color.white);
-      texteRegles.setSize(550,100);
-      texteRegles.setLocation(150,20);
-      texteRegles.setFont(new Font("TimesRoman",Font.BOLD+Font.ITALIC,20));
-      texteRegles.setForeground(Color.white);
-
 
       this.add(conteneur);
-      conteneur.add(texteRegles);
       conteneur.add(boutonLancement);
       conteneur.add(texteRegles2);
 

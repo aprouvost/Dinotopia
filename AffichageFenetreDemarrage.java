@@ -11,12 +11,15 @@ import java.util.LinkedList;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.applet.*;
+
 
 public class AffichageFenetreDemarrage extends JFrame implements ActionListener {
 
     private JButton boutonLancement;
     private PanelB pan;
     private Plateau vie;
+    private AudioClip clip;
 
     public AffichageFenetreDemarrage(Plateau vie){
         Image icone = Toolkit.getDefaultToolkit().getImage("img/skull.jpg");
@@ -51,6 +54,8 @@ public class AffichageFenetreDemarrage extends JFrame implements ActionListener 
 
         this.add(conteneur);
         conteneur.add(boutonLancement);
+        Son groove = new Son();
+        groove.jouer("Jurassic.wav");
 
   }
 

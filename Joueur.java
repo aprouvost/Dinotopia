@@ -67,8 +67,8 @@ public class Joueur extends JFrame implements ActionListener  {
         JLabel texteAff3 = new JLabel("Proportion d'herbivores parmis eux");
         texteAff3.setFont(new Font("TimesRoman",Font.BOLD,20));
         texteAff3.setForeground(Color.white);
-        texteAff3.setLocation(430,230);
-        texteAff3.setSize(250,50);
+        texteAff3.setLocation(400,230);
+        texteAff3.setSize(400,50);
 
         textField = new JTextField();
         textField.setColumns(5);

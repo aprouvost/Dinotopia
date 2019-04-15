@@ -15,7 +15,7 @@ public class Dinosaure {
 
 
     public String toString(){
-      return " Dinosaure de type"+ type+ " vivant depuis"+age;
+      return " Dinosaure de type"+ type+ " vivant depuis "+age;
     }
 
 
@@ -67,14 +67,18 @@ public class Dinosaure {
           int ret = 0;
           for(int i =h-1; i <= h+1; i++){
               for(int k = l-1; k<= l+1; k++){
+                System.out.println("nbrVoisin OutOf Bounds "+i + " " + k+ " "+outOfBounds(m,i,k));
                   if(outOfBounds(m,i,k) == false && (i == h && k == l) ==false){
-                      if(m[i][k] != null)
+                    System.out.println("Je rentre");
+                      if(m[i][k] != null){
                           ret ++;
-                        }
-                    }
+                          System.out.println("Je suis carrement dedans");
+                      }
                   }
-            return ret; // retourne le nombre de voisins carnivores ( dans les cases voisines ) du dinosaure
+              }
           }
+          return ret; // retourne le nombre de voisins carnivores ( dans les cases voisines ) du dinosaure
+        }
 
 
         /** Calcule à partir de la case indiquée si la case se situe sur le bord du plateau de jeu.
@@ -85,15 +89,15 @@ public class Dinosaure {
       	*/
 
     public static boolean outOfBounds(Dinosaure [][]m, int h, int l){ // Fonction prenant en parametre le plateau de jeu et ses dimensions
-            boolean ret = false;
-            if(h >= m.length || h < 0){
-                ret = true;
-                }
-                else if(l >= m[h].length || l < 0){
-                ret = true;
-                }
-                return ret;
-              }
+        boolean ret = false;
+        if(h >= m.length || h < 0){
+          ret = true;
+        }
+        else if(l >= m[h].length || l < 0){
+          ret = true;
+        }
+        return ret;
+    }
 
 
 

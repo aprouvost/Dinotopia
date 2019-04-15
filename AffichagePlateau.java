@@ -124,7 +124,7 @@ public class AffichagePlateau extends JFrame implements ActionListener {
 			events.remove(meteorite);
 			events.remove(secheresse);
 			this.remove(bout1);
-			jop.showMessageDialog(null,"Le jeu est terminé, \n Bravo","Fin du Jeu",JOptionPane.INFORMATION_MESSAGE);
+			jop.showMessageDialog(null,"Le jeu est termine, \n Bravo","Fin du Jeu",JOptionPane.INFORMATION_MESSAGE);
 			new AffichageFin(monde);
 		}
 	}

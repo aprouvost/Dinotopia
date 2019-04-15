@@ -323,13 +323,13 @@ public class Plateau extends JPanel {
 		  propavantavant = propavant;
 		  propavant = prop;
 		  prop = vivants/h*l;
+
 	  }
 
 
 
 	  if(prop==propavant && prop==propavantavant) {
 		  mondeStable = true;
-      System.out.println("Stable");
 	  }
 
 
@@ -395,8 +395,12 @@ public class Plateau extends JPanel {
     for (int i=0; i<l; i++){
       for (int j=0; j<h; j++){
         if ( mondeDino[i][j].outOfBounds(mondeDino,i,j) == false ){
-          if(mondeDino[i][j] != null && mondeDino[i][j].nbrVoisin(mondeDino,h,l )>0){
+          System.out.println("//////////MondeDino"+i+" "+j+" "+mondeDino[i][j]);
+          System.out.println("**********Nbr voisins"+i+" "+j+" "+mondeDino[i][j].nbrVoisin(mondeDino,i,j));
+
+          if(mondeDino[i][j] != null && mondeDino[i][j].nbrVoisin(mondeDino,i,j )>0){
             estStable = false;
+            System.out.println("Je suis al");
           }
         }
       }
@@ -418,7 +422,6 @@ public class Plateau extends JPanel {
 
   public boolean finPartie(){
     if  (mondeVivant()==false ){
-      System.out.println("mort");
       return true;
     }else if ( mondeStable()==true){
       System.out.println("stable");
